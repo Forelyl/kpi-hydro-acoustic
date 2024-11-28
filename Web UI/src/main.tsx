@@ -1,22 +1,24 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import LayoutWithHeader from './layouts/LayoutWithHeader';
-import AddFile from './pages/AddFile';
-import About from './pages/About';
-import Pipeline from './pages/Pipeline';
-import DownloadResult from './pages/DownloadResult';
+import {
+  AboutPage,
+  AddFilePage,
+  DownloadResultPage,
+  PipelinePage
+} from './pages';
+import './index.css';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LayoutWithHeader />,
     children: [
-      { index: true, element: <AddFile /> },
-      { path: 'about', element: <About /> },
-      { path: 'pipeline', element: <Pipeline /> },
-      { path: 'downlaod', element: <DownloadResult /> }
+      { index: true, element: <AddFilePage /> },
+      { path: 'about', element: <AboutPage /> },
+      { path: 'pipeline', element: <PipelinePage /> },
+      { path: 'downlaod', element: <DownloadResultPage /> }
     ]
   }
 ]);

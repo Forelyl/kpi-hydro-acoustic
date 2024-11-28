@@ -1,4 +1,17 @@
+import { useLocation, useNavigate } from 'react-router';
+import CloseIcon from '../icons/CloseIcon';
+import HeaderNavigation from './HeaderNavigation';
+
 const Header = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    const promise = navigate(-1);
+    if (promise) promise.catch(console.error);
+    else navigate('/')!.catch(console.error);
+  };
+
   return (
     <header>
       <img src="logo.svg" />
@@ -6,9 +19,13 @@ const Header = () => {
         <span>Sound</span>
         <span className="green_text">Surface</span>
       </h1>
-      <div>
-        кнопка
-      </div>
+      {pathname === '/about' ? (
+        <div onClick={handleGoBack}>
+          <CloseIcon />
+        </div>
+      ) : (
+        <HeaderNavigation />
+      )}
     </header>
   );
 };
