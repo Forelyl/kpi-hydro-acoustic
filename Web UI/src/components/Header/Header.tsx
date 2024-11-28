@@ -1,11 +1,14 @@
 const Header = () => {
   return (
     <header>
-      <img width="128px" height="128px" src="logo.svg" />
+      <img src="logo.svg" />
       <h1>
         <span>Sound</span>
-        <span>Surface</span>
+        <span className="green_text">Surface</span>
       </h1>
+      <div>
+        кнопка
+      </div>
     </header>
   );
 };
