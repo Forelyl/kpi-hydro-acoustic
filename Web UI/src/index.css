@@ -41,6 +41,12 @@ header {
   > div {
     justify-self: end;
   }
+
+  > #close_button {
+    width: 7vh;
+    height: 7vh;
+    cursor: pointer;
+  }
 }
 
 .green_text {
@@ -56,25 +62,24 @@ h1 {
 #add_file_page {
   display: flex;
   flex-direction: column;
-}
-
-#add_file_page > a {
-  height: 6vh;
-  width: 6vh;
-
-  border:solid black;
-  border-radius: 4vh;
-
-  align-content: center;
-  align-self: end;
-  margin: auto 3vw 4vh 0;
-
-  color: black;
-  text-align: center;
-  text-decoration: none;
-
-  :visited {
+  > a {
+    height: 6vh;
+    width: 6vh;
+  
+    border:solid black;
+    border-radius: 4vh;
+  
+    align-content: center;
+    align-self: end;
+    margin: auto 3vw 4vh 0;
+  
     color: black;
+    text-align: center;
+    text-decoration: none;
+  
+    :visited {
+      color: black;
+    }
   }
 }
 
@@ -220,3 +225,20 @@ h1 {
   color: black;
 }
 
+#about_us_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > h2 {
+    margin-bottom: 3vh;
+    font-family: "Krona One", sans-serif;
+    font-size: 4vh;
+  }
+
+  > p {
+    margin: 0 7.5vw 2vh 7.5vw;
+    text-indent: 30px;
+    text-align: justify;
+  }
+}
