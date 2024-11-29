@@ -1,6 +1,6 @@
-const About = () => {
+const AboutPage = () => {
   return (
-    <main>
+    <main id="about_us_page">
       <h2>About us</h2>
       <p>
         Pizza ipsum dolor amet hawaiian meat lovers pepperoni, philly steak
@@ -37,4 +37,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;
