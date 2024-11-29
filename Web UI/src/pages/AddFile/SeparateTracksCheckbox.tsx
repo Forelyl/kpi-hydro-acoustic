@@ -10,9 +10,10 @@ const SeparateTracksCheckbox = ({ setSeparateTracks }: Props) => {
   };
 
   return (
-    <div>
-      <span>Separate multiple tracks</span>
-      <input type="checkbox" onChange={handleCheck} />
+    <div id="separate_tracks">
+      <label htmlFor='separate'>Separate multiple tracks</label>
+      <input type="checkbox" id="separate" onChange={handleCheck} />
+      <label htmlFor="separate" className="custom_checkbox"></label>
     </div>
   );
 };

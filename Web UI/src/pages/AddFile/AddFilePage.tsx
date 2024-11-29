@@ -10,10 +10,10 @@ const AddFile = () => {
   console.log(file, separateTracks);
 
   return (
-    <main>
+    <main id='add_file_page'>
       <FileInputField setFile={setFile} />
       <SeparateTracksCheckbox setSeparateTracks={setSeparateTracks} />
-      <button disabled={!file}>Next</button>
+      <button disabled={!file} id="upload_button">Next</button>
       <Link to="about">?</Link>
     </main>
   );
