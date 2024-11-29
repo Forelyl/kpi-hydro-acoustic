@@ -9,7 +9,6 @@ const Header = () => {
   const handleGoBack = () => {
     const promise = navigate(-1);
     if (promise) promise.catch(console.error);
-    else navigate('/')!.catch(console.error);
   };
 
   return (
@@ -21,6 +20,7 @@ const Header = () => {
       </h1>
       {pathname === '/about' ? (
         <div onClick={handleGoBack}>
+          aboba
           <CloseIcon />
         </div>
       ) : (
