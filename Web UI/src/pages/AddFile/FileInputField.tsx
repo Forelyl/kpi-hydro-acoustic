@@ -1,35 +1,29 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import FileInputIcon from '../../components/icons/FileInputIcon';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { setFile } from '../../store/loadedFileSlice';
 
-interface Props {
-  setFile: Dispatch<SetStateAction<File | undefined>>;
-}
+const FileInputField = () => {
+  const dispatch = useAppDispatch();
+  const { file } = useAppSelector((state) => state.loadedFile);
 
-const FileInputField = ({ setFile }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const [inputText, setInputText] = useState<string>("Add file");
 
   const handleSelectFile = () => {
     if (fileInputRef.current) fileInputRef.current.click();
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.item(0);
-    if (file) {
-      setFile(file);
-      setInputText(file.name);
-    } 
+    const newFile = e.target.files?.item(0);
+    if (newFile && newFile.name !== file?.name) dispatch(setFile(newFile));
   };
-  
 
   return (
-    <div id='file_input' onClick={handleSelectFile}>
-      <div></div>
-      <span>{inputText}</span>
+    <div id="file_input" onClick={handleSelectFile}>
+      <span>{file?.name ?? 'Add file'}</span>
       <input
         type="file"
-        accept="audio/wav"
+        accept="audio/wav document/doc"
         style={{ display: 'none' }}
         ref={fileInputRef}
         onChange={handleFileChange}
