@@ -19,8 +19,7 @@ const Header = () => {
         <span className="green_text">Surface</span>
       </h1>
       {pathname === '/about' ? (
-        <div onClick={handleGoBack}>
-          aboba
+        <div onClick={handleGoBack} id="close_button">
           <CloseIcon />
         </div>
       ) : (
