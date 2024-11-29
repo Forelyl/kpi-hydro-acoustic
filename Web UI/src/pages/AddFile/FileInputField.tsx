@@ -8,10 +8,7 @@ const FileInputField = () => {
 
   return (
     <DndContext>
-      <div
-        {...droppableAreaProps}
-        onDragOver={(e) => e.preventDefault()}
-        id="file_input">
+      <div {...droppableAreaProps} id="file_input">
         <span>{filename}</span>
         <input
           type="file"

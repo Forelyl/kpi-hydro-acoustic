@@ -48,18 +48,30 @@ const useFileInput = () => {
     [handleSetFile]
   );
 
+  const handleDragEnter = useCallback(() => setDragGoing(true), []);
+
+  const handleDragLeave = useCallback(() => setDragGoing(false), []);
+
+  const handleDragEnd = useCallback(() => setDragGoing(false), []);
+
+  const handleDragOver = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => e.preventDefault(),
+    []
+  );
+
   return {
     fileInputRef,
     filename: file?.name ?? 'Add file',
     handleFileChange,
     droppableAreaProps: {
-      onDragEnter: () => setDragGoing(true),
-      onDragLeave: () => setDragGoing(false),
-      onDragEnd: () => setDragGoing(false),
+      onClick: handleFileSelect,
+      onDragEnter: handleDragEnter,
+      onDragLeave: handleDragLeave,
+      onDragEnd: handleDragEnd,
+      onDragOver: handleDragOver,
       onDrop: handleFileDrop,
       ref: setNodeRef,
-      style: { opacity: isDragGoing ? 0.5 : 1 },
-      onClick: handleFileSelect
+      style: { opacity: isDragGoing ? 0.5 : 1 }
     }
   };
 };
