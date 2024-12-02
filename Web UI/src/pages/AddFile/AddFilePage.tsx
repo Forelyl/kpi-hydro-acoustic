@@ -1,12 +1,13 @@
 import FileInputField from './FileInputField';
 import SeparateTracksCheckbox from './SeparateTracksCheckbox';
 import { Link } from 'react-router';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import Modal from '../../components/Modal/Modal';
+import { resetError } from '../../store/loadedFileSlice';
 
 const AddFile = () => {
-  const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
-
-  console.log(file, separateTracks);
+  const dispatch = useAppDispatch();
+  const { file, error } = useAppSelector((state) => state.loadedFile);
 
   return (
     <main id="add_file_page">
@@ -16,6 +17,11 @@ const AddFile = () => {
         Next
       </button>
       <Link to="about">?</Link>
+      <Modal open={!!error}>
+        <h2>{error?.title}</h2>
+        <p>{error?.message}</p>
+        <button onClick={() => dispatch(resetError())}>OK</button>
+      </Modal>
     </main>
   );
 };

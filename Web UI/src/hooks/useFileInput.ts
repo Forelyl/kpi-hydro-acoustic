@@ -1,7 +1,8 @@
 import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { useDroppable } from '@dnd-kit/core';
-import { setFile } from '../store/loadedFileSlice';
+import { setFile, setFileError } from '../store/loadedFileSlice';
+import { fileErrors } from '../errors/fileErrors';
 
 export const acceptedFileTypes = 'audio/wav, audio/mp3';
 
@@ -20,7 +21,8 @@ const useFileInput = () => {
     (newFile?: File | null) => {
       if (newFile && newFile.name !== file?.name) {
         if (acceptedFileTypes.includes(newFile.type))
-          dispatch(setFile(newFile));
+          return dispatch(setFile(newFile));
+        dispatch(setFileError(fileErrors.INVALID_FORMAT));
       }
     },
     [dispatch, file]
@@ -33,19 +35,24 @@ const useFileInput = () => {
   const handleFileDrop = useCallback(
     (e: DragEvent<HTMLDivElement>) => {
       e.preventDefault();
-      if (e.dataTransfer?.files.length === 1)
-        handleSetFile(e.dataTransfer?.files.item(0));
       setDragGoing(false);
+
+      if (e.dataTransfer?.files.length === 1)
+        return handleSetFile(e.dataTransfer?.files.item(0));
+      dispatch(setFileError(fileErrors.MANY_FILES));
     },
-    [handleSetFile]
+    [handleSetFile, dispatch]
   );
 
   const handleFileChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files?.length === 1) handleSetFile(e.target.files?.item(0));
       setDragGoing(false);
+
+      if (e.target.files?.length === 1)
+        return handleSetFile(e.target.files?.item(0));
+      dispatch(setFileError(fileErrors.MANY_FILES));
     },
-    [handleSetFile]
+    [handleSetFile, dispatch]
   );
 
   const handleDragEnter = useCallback(() => setDragGoing(true), []);
