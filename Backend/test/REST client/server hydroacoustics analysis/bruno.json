@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "server hydroacoustics analysis",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

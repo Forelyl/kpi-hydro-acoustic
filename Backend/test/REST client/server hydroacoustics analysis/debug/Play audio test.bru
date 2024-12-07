@@ -1,0 +1,15 @@
+meta {
+  name: Play audio test
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{debug}}/play_audio
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file(C:\Users\Alex\Downloads\Secunda.mp3)
+}
