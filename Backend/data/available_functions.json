@@ -1,0 +1,248 @@
+[
+    {
+        "id": 0,
+        "name":        "Low Pass Filter",
+        "description": "an audio signal filter that muffles the signal amplitude after the cut-off frequency",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Pivotal frequency",
+                "description": "Frequency that is representing edge before/after which, filter will be used",
+                "datatype":    "Positive float",
+                "units":       "Hz"
+            }
+        ],
+        "choose_track": true
+    },
+
+    {
+        "id": 1,
+        "name":        "High Pass Filter",
+        "description": "an audio signal filter that muffles the signal amplitude to the cut-off frequency",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Pivotal frequency",
+                "description": "Frequency that is representing edge before/after which, filter will be used",
+                "datatype":    "Positive float",
+                "units":       "Hz"
+            }
+        ],
+        "choose_track": true
+    },
+
+    {
+        "id": 2,
+        "name":        "Band Pass Filter",
+        "description": "an audio signal filter that muffles the signal amplitude before and after the first and after the second cutoff frequency",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Outer-Pivotal frequency left",
+                "description": "Frequency that is representing edge before which, filter will be used",
+                "datatype":    "Positive float",
+                "units":       "Hz"
+            },
+            {
+                "name":        "Outer-Pivotal frequency right",
+                "description": "Frequency that is representing edge after which, filter will be used",
+                "datatype":    "Positive float",
+                "units":       "Hz"
+            }
+        ],
+        "choose_track": true
+    },
+
+    {
+        "id": 3,
+        "name":        "Notch Filter",
+        "description": "an audio signal filter that mutes the amplitude of a given frequency signal almost entirely",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Inner-Pivotal frequency left",
+                "description": "Frequency that is representing edge after which, filter will be used",
+                "datatype":    "Positive float",
+                "units":       "Hz"
+            },
+            {
+                "name":        "Inner-Pivotal frequency right",
+                "description": "Frequency that is representing edge before which, filter will be used",
+                "datatype":    "Positive float",
+                "units":       "Hz"
+            }
+        ],
+        "choose_track": true
+    },
+
+
+
+
+
+    {
+        "id": 4,
+        "name":        "Gain/Volume",
+        "description": "Change amplitude of all non zero frequencies on some amount of decibels",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Level",
+                "description": "Increase in decibels (0dB means nothing will be changed)",
+                "datatype":    "Float",
+                "units":       "dB"
+            }
+        ],
+        "choose_track": true
+    },
+
+    {
+        "id": 5,
+        "name":        "Master/Level",
+        "description": "Apply percents on amplitudes on all frequencies",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Level",
+                "description": "Percent of change (100% means nothing will be changed)",
+                "datatype":    "Non negative float",
+                "units":       "%"
+            }
+        ],
+        "choose_track": true
+    },
+
+
+
+    {
+        "id": 6,
+        "name":        "Noise filtering",
+        "description": "Separates signal into signal and noise section, than reduce noise value for selected amount of dB",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Level",
+                "description": "Decrement in decibels (0 dB means nothing will be changed, default value = -3 dB)",
+                "datatype":    "Float",
+                "units":       "dB",
+                "default":     -3.0
+            }
+        ],
+        "choose_track": true
+    },
+
+    {
+        "id": 7,
+        "name":        "Useful signal amplification",
+        "description": "Separates signal into signal and noise section, than increases signal value for selected amount of dB",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Level",
+                "description": "Increment in decibels (0 dB means nothing will be changed, default value = +3 dB)",
+                "datatype":    "Float",
+                "units":       "dB",
+                "default":     3.0
+            }
+        ],
+        "choose_track": true
+    },
+
+
+
+
+
+
+
+    {
+        "id": 8,
+        "name":        "Select/trim time interval",
+        "description": "Selected interval is to be left",
+        "func_type":   "Data modifier",
+        "args": [
+            {
+                "name":        "Start time",
+                "description": "Start time of trimming/selecting, left part from start time is to be deleted",
+                "datatype":    "Time",
+                "units":       ""
+            },
+            {
+                "name":        "End time",
+                "description": "End time of trimming/selecting, right part from end time is to be deleted",
+                "datatype":    "Time",
+                "units":       ""
+            }
+        ],
+        "choose_track": true
+    },
+
+
+
+
+
+
+    {
+        "id": 9,
+        "name":        "3D Signal diagram",
+        "description": "Projection of three-dimensional space onto a two-dimensional plane, where the third coordinate axis is represented by a color change",
+        "func_type":   "Graphical",
+        "args": [
+            {
+                "name":        "x-axis",
+                "description": "Characteristics that is been represented by x-axis",
+                "datatype":    "Track characteristics",
+                "units":       ""
+            },
+            {
+                "name":        "y-axis",
+                "description": "Characteristics that is been represented by y-axis",
+                "datatype":    "Track characteristics",
+                "units":       ""
+            },
+            {
+                "name":        "z-axis",
+                "description": "Characteristics that is been represented by z-axis",
+                "datatype":    "Track characteristics",
+                "units":       ""
+            }
+        ],
+        "choose_track": true
+    },
+    {
+        "id": 10,
+        "name":        "2D Signal diagram",
+        "description": "Graph with two axes with corresponding data",
+        "func_type":   "Graphical",
+        "args": [
+            {
+                "name":        "x-axis",
+                "description": "Characteristics that is been represented by x-axis",
+                "datatype":    "Track characteristics",
+                "units":       ""
+            },
+            {
+                "name":        "y-axis",
+                "description": "Characteristics that is been represented by y-axis",
+                "datatype":    "Track characteristics",
+                "units":       ""
+            }
+        ],
+        "choose_track": true
+    },
+
+
+
+    {
+        "id": 11,
+        "name":        "Copy/Branch",
+        "description": "Makes n-amount copies of selected track",
+        "func_type":   "Copy",
+        "args": [
+            {
+                "name":        "Amount of copies",
+                "description": "Amount of copies of tracks (1 copy means that amount of tracks won't change)",
+                "datatype":    "Positive integer"
+            }
+        ],
+        "choose_track": true
+    }
+]
