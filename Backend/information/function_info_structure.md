@@ -35,7 +35,7 @@ It’s easy to let exercise slide in the suburbs where you have to drive your ca
 #### values:
 1. Graphical - as a result produces image (no additional tracks).
 2. Data modifier - as a result changes some part of the track, yet not producing.additional tracks.
-3. Copy - makes n instances of selected track. ()
+3. Copy - makes n instances of selected track.
 
 ### **Datatype** - str
 #### values:
