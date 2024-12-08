@@ -3,11 +3,11 @@
 | #     | field name    | type                          |
 | :---: | ---           | ---                           |
 | 1.    | id:           | unique unsigned int (>= 0)    |
-| 1.    | name:         | str (max len: 100)            |
-| 2.    | description:  | str (max len: 500)            |
-| 3.    | func_type:    | **Options**: Type_list        |
-| 4.    | args:         | list[...], ... = Types: Args  |
-| 5.    | choose_track: | bool                          |
+| 2.    | name:         | str (max len: 100)            |
+| 3.    | description:  | str (max len: 500)            |
+| 4.    | func_type:    | **Options**: Type_list        |
+| 5.    | args:         | list[...], ... = Types: Args  |
+| 6.    | choose_track: | bool                          |
 
 > choose_track: the value is ***true*** then we select track in drop down menu. ***false*** - when it shouldn't.
 
