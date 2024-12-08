@@ -55,8 +55,7 @@ It’s easy to let exercise slide in the suburbs where you have to drive your ca
     a: Track = [2];     // track 2
     b: Track = [2, 3];  // 3-rd copy of track 2
     ```
-8. Track characteristics - str, one of three values ["frequency", "amplitude", "time"] <br/>
-
+8. Track characteristics - str, one of three values ["frequency", "amplitude", "time"]
 # Additional/optional fields
 Additional/optional fields are such fields which clarify specific base fields or provide additional information.
 

@@ -21,7 +21,7 @@ app = APIRouter(prefix='/help', lifespan=lifespan)
 
 
 @app.get('/get_number')
-async def a():
+async def get_number_test():
     return {"result of help": random.randint(1, 144)}
 
 

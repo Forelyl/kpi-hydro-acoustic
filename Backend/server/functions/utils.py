@@ -22,7 +22,8 @@ def play_audio(file):
 
     # Keep the script running while the audio is playing
     i = 0
-    while pygame.mixer.music.get_busy() and i < 30:
+    max_len = 100000 # 30
+    while pygame.mixer.music.get_busy() and i < max_len:
         i += 1
         pygame.time.Clock().tick(10)  # Wait for the music to finish
 
