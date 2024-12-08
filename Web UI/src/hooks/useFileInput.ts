@@ -1,7 +1,11 @@
 import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { useDroppable } from '@dnd-kit/core';
-import { setFile, setFileError } from '../store/loadedFileSlice';
+import {
+  setFile,
+  setFileDuration,
+  setFileError
+} from '../store/loadedFileSlice';
 import { fileErrors } from '../errors/fileErrors';
 
 export const acceptedFileTypes = 'audio/wav, audio/mp3';
@@ -20,8 +24,28 @@ const useFileInput = () => {
   const handleSetFile = useCallback(
     (newFile?: File | null) => {
       if (newFile && newFile.name !== file?.name) {
-        if (acceptedFileTypes.includes(newFile.type))
-          return dispatch(setFile(newFile));
+        if (acceptedFileTypes.includes(newFile.type)) {
+          const url = URL.createObjectURL(newFile);
+          const audio = new Audio(url);
+          audio.addEventListener(
+            'loadedmetadata',
+            () => {
+              dispatch(setFile(newFile));
+              dispatch(setFileDuration(Math.round(audio.duration)));
+              URL.revokeObjectURL(url);
+            },
+            { once: true }
+          );
+          audio.addEventListener(
+            'error',
+            () => {
+              dispatch(setFileError(fileErrors.LOAD_FAILED));
+              URL.revokeObjectURL(url);
+            },
+            { once: true }
+          );
+          return;
+        }
         dispatch(setFileError(fileErrors.INVALID_FORMAT));
       }
     },
