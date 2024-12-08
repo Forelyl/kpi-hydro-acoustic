@@ -7,7 +7,7 @@
 | 3     | args  | list[**Values**]          | represent values that was inputted (in order of declaration) |
 
 *example*:
-```json
+```js
 {
     "id":    1,      // function of id = 1
     "track": [1, 2]  // 2-nd copy of 1-st track, track = 1.2
