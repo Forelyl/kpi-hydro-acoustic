@@ -6,6 +6,12 @@ meta {
 
 post {
   url: {{call}}/
-  body: none
+  body: multipartForm
   auth: none
+}
+
+body:multipart-form {
+  file: @file(C:\Users\Alex\Downloads\Secunda.mp3)
+  pipeline: {"pipeline": [{"id": 1, "track":  [1], "args": [1]}]}
+  separate: true
 }

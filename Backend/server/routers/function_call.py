@@ -1,4 +1,5 @@
-from fastapi import APIRouter, UploadFile, File, Form, Depends, HTTPException
+from fastapi import APIRouter, UploadFile, File, Form, Depends, HTTPException, status
+from fastapi.responses import StreamingResponse
 from typing import Annotated
 import random
 from pydantic import BaseModel, ValidationError
@@ -21,36 +22,26 @@ class Pipeline(BaseModel):
     pipeline: list[Function_call]
 
 
-async def pipeline_deserialize(pipeline: Annotated[str, Form()]) -> Pipeline:
+async def pipeline_from_form(pipeline: Annotated[str, Form()]) -> Pipeline:
     print(pipeline)
     # return Pipeline(pipeline=[{"id": 1, "track": [1], "args": [1, 2]}])
     try:
-        return Pipeline.model_validate_json(pipeline)
+        return Pipeline.model_validate_json(pipeline, strict=True)
     except ValidationError as e:
         raise HTTPException(
             status_code=400,
-            detail=e.errors()
+            detail=e.errors(include_url=False, include_context=False)
         )
-    # try:
-    # except ValueError as e:
-    #     print(e)
-    #     return None
-    # await input("...")
-    # return Pipeline.model_validate(pipeline)
 
 
-class A(BaseModel):
-    a: int
-    b: int
-
-#   Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='string', input_type=str]
-#     For further information visit https://errors.pydantic.dev/2.10/v/json_invalid
-
-
-@app.post('/')
+@app.post('/', status_code=status.HTTP_200_OK, response_class=StreamingResponse)
 async def pipeline_interface(
-        file: Annotated[UploadFile, File()],
-        pipeline: Annotated[Pipeline, Depends(pipeline_deserialize)],
+        file:     Annotated[UploadFile, File()],
+        pipeline: Annotated[Pipeline, Depends(pipeline_from_form)],
+        separate: Annotated[bool, Form()]
 ):
-    # print("Pipe:", pipeline)
-    return
+    def iterfile():
+        with open("server/temp_data/zip_example.zip", mode="rb") as file_like:
+            yield from file_like
+
+    return StreamingResponse(iterfile(), media_type="application/zip")
