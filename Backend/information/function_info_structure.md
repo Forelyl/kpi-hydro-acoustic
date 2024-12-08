@@ -3,11 +3,11 @@
 | #     | field name    | type                          |
 | :---: | ---           | ---                           |
 | 1.    | id:           | unique unsigned int (>= 0)    |
-| 1.    | name:         | str (max len: 100)            |
-| 2.    | description:  | str (max len: 500)            |
-| 3.    | func_type:    | **Options**: Type_list        |
-| 4.    | args:         | list[...], ... = Types: Args  |
-| 5.    | choose_track: | bool                          |
+| 2.    | name:         | str (max len: 100)            |
+| 3.    | description:  | str (max len: 500)            |
+| 4.    | func_type:    | **Options**: Type_list        |
+| 5.    | args:         | list[...], ... = Types: Args  |
+| 6.    | choose_track: | bool                          |
 
 > choose_track: the value is ***true*** then we select track in drop down menu. ***false*** - when it shouldn't.
 
@@ -35,7 +35,7 @@ It’s easy to let exercise slide in the suburbs where you have to drive your ca
 #### values:
 1. Graphical - as a result produces image (no additional tracks).
 2. Data modifier - as a result changes some part of the track, yet not producing.additional tracks.
-3. Copy - makes n instances of selected track. ()
+3. Copy - makes n instances of selected track.
 
 ### **Datatype** - str
 #### values:
@@ -44,7 +44,7 @@ It’s easy to let exercise slide in the suburbs where you have to drive your ca
 3. Float
 4. Positive float - float that is bigger than zero (> 0.0)
 5. Non negative float - float that is bigger than or equals to zero (>= 0.0)
-6. Time - is dict of {minutes: a, seconds: b}, a is [0, MAX_FLOAT], b is [0, 60] <br/>
+6. Time - is dict of {minutes: a, seconds: b}, a is [0, MAX_FLOAT], b is [0, 59] <br/>
     *example*
     ```ts
     a: Time = {minutes: 12, seconds: 1}; // 12:01
