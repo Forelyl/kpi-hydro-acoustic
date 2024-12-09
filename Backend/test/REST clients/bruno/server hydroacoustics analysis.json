@@ -1,0 +1,235 @@
+{
+  "name": "server hydroacoustics analysis",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "debug",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get number test",
+          "seq": 1,
+          "request": {
+            "url": "{{debug}}/get_number",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Play audio test",
+          "seq": 2,
+          "request": {
+            "url": "{{debug}}/play_audio",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "call_functions",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get number test",
+          "seq": 1,
+          "request": {
+            "url": "{{call}}/get_number",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Pipeline",
+          "seq": 2,
+          "request": {
+            "url": "{{call}}/",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "file",
+                  "name": "file",
+                  "value": [
+                    "C:\\Users\\Alex\\Downloads\\Secunda.mp3"
+                  ],
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "pipeline",
+                  "value": "{\"pipeline\": [{\"id\": 1, \"track\":  [1], \"args\": [1]}]}",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "separate",
+                  "value": "true",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "help",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get number test",
+          "seq": 1,
+          "request": {
+            "url": "{{help}}/get_number",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get_schema",
+          "seq": 2,
+          "request": {
+            "url": "{{help}}/",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "vars": {
+        "req": [
+          {
+            "name": "address",
+            "value": "127.0.0.1:6789",
+            "enabled": true,
+            "local": false,
+            "uid": "Pb0S8gP5TL4jJWyy7O0Qi"
+          },
+          {
+            "name": "call",
+            "value": "{{address}}/functions_call",
+            "enabled": true,
+            "local": false,
+            "uid": "tJfjBKq2dSFBem73sbc6J"
+          },
+          {
+            "name": "debug",
+            "value": "{{address}}/debug",
+            "enabled": true,
+            "local": false,
+            "uid": "XNTr0Z7b6QNVUaEWfRdyk"
+          },
+          {
+            "name": "help",
+            "value": "{{address}}/help",
+            "enabled": true,
+            "local": false,
+            "uid": "DbFop4jl6T1LJYLsvBIQ7"
+          }
+        ]
+      }
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "server hydroacoustics analysis",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}

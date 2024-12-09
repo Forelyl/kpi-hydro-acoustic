@@ -1,0 +1,207 @@
+{
+  "info": {
+    "name": "server hydroacoustics analysis",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "debug",
+      "item": [
+        {
+          "name": "Get number test",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "{{debug}}/get_number",
+              "protocol": "",
+              "host": [
+                "{{debug}}"
+              ],
+              "path": [
+                "get_number"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Play audio test",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "{{debug}}/play_audio",
+              "protocol": "",
+              "host": [
+                "{{debug}}"
+              ],
+              "path": [
+                "play_audio"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "call_functions",
+      "item": [
+        {
+          "name": "Get number test",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "{{call}}/get_number",
+              "protocol": "",
+              "host": [
+                "{{call}}"
+              ],
+              "path": [
+                "get_number"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Pipeline",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "{{call}}/",
+              "protocol": "",
+              "host": [
+                "{{call}}/"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": [
+                    "C:\\Users\\Alex\\Downloads\\Secunda.mp3"
+                  ],
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "pipeline",
+                  "value": "{\"pipeline\": [{\"id\": 1, \"track\":  [1], \"args\": [1]}]}",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "separate",
+                  "value": "true",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "help",
+      "item": [
+        {
+          "name": "Get number test",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "{{help}}/get_number",
+              "protocol": "",
+              "host": [
+                "{{help}}"
+              ],
+              "path": [
+                "get_number"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get_schema",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "{{help}}/",
+              "protocol": "",
+              "host": [
+                "{{help}}/"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "bruno",
+      "event": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "debug",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "call",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "help",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "address",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

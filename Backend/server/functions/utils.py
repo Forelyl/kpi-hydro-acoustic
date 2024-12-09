@@ -28,3 +28,8 @@ def play_audio(file):
         pygame.time.Clock().tick(10)  # Wait for the music to finish
 
     pygame.mixer.music.stop()
+
+
+def pseudo_zip_result() -> io.BytesIO:
+    with open("server/temp_data/zip_example.zip", "rb") as pseudo_result:
+        return io.BytesIO(pseudo_result.read())
