@@ -78,7 +78,7 @@ const useFileInput = () => {
       onDragOver: handleDragOver,
       onDrop: handleFileDrop,
       ref: setNodeRef,
-      style: { opacity: isDragGoing ? 0.5 : 1 }
+      className: isDragGoing ? "dragging" : "not_dragging" 
     }
   };
 };

@@ -90,7 +90,6 @@ h1 {
   margin-top: 15vh;
   aspect-ratio: 11.5/1;
 
-  border: black dashed;
   border-radius: 6vh;
 
   align-self: center;
@@ -114,6 +113,22 @@ h1 {
   * {
     pointer-events: none;
   }
+
+}
+
+.not_dragging {
+  border: black dashed;
+  transition: all 0.225s ease-in-out;
+}
+
+.dragging {
+  background-color: #e3fff7cc;
+  border: black solid;
+  transition: all 0.225s ease-in-out;
+}
+
+.ready {
+  border: black solid;
 }
 
 #file_input:hover {
