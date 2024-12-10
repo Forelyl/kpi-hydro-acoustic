@@ -249,3 +249,35 @@ h1 {
     text-align: justify;
   }
 }
+
+
+#pipline_page {
+
+}
+
+.pipline_step {
+  display: flex;
+  flex-direction: column;
+
+  border: solid black;
+  border-radius: 20px;
+
+}
+
+.top_part {
+  display: flex;
+  justify-content: space-between;
+  border: solid black;
+  border-radius: 20px;
+  border-bottom-right-radius: 0px;
+  margin: -3px;
+
+  > div {
+    display: flex;
+  }
+
+  svg {
+    height: 10vh;
+    width: 10vh;
+  }
+}

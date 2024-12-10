@@ -11,14 +11,18 @@ interface Props {
 
 const PipelineStep = ({ pipeline }: Props) => {
   return (
-    <div>
-      <div>
-        <MenuIcon />
-        <div onClick={() => pipeline.removeSelf()}>
-          <CloseIcon />
+    <div className='pipline_step'>
+      <div className='top_part'>
+        <div>
+          <MenuIcon />
+          <div onClick={() => pipeline.removeSelf()}>
+            <CloseIcon />
+          </div>
         </div>
-        <TrackSelect />
-        <AnalyzeTypeSelect />
+        <div>
+          <TrackSelect />
+          <AnalyzeTypeSelect />
+        </div>
       </div>
       <TimeBounds />
     </div>
