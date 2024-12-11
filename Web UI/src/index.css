@@ -1,6 +1,6 @@
 :root {
   --dark_green: #1d715a;
-  --background: rgba(255, 255, 255, 0.87);
+  --background: #ffffffde;
   --light_green: #26fabe;
   --disabled_color: #bababa;
 }
@@ -252,32 +252,171 @@ h1 {
 
 
 #pipline_page {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pipline_step {
+  width: auto;
+  height: 38vh;
+  aspect-ratio: 4.5/1;
+  margin-top: 5vh;
+
+  align-self: center;
   display: flex;
   flex-direction: column;
-
+  
   border: solid black;
-  border-radius: 20px;
+  border-radius: 3vh;
 
 }
 
 .top_part {
+  height: 9vh;
+
   display: flex;
   justify-content: space-between;
   border: solid black;
-  border-radius: 20px;
+  border-radius: 3vh;
   border-bottom-right-radius: 0px;
   margin: -3px;
 
   > div {
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > div {
+      padding: 2px;
+      display: flex;
+    }
   }
 
   svg {
-    height: 10vh;
-    width: 10vh;
+    height: 6vh;
+    width: auto;
+    aspect-ratio: 1/1;
+    margin: 0 1.5vh 0 1.5vh;
+    cursor: pointer;
   }
+}
+
+.select_container {
+  position: relative;
+  height: calc(9vh - 4px);
+  width: auto;
+  aspect-ratio: 4/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select {
+  border: none;
+  appearance: none;
+  border-radius: inherit;
+  padding: 0 30px 0 30px;
+  height: 100%;
+  width: 100%;
+  color: var(--background);
+  font-size: 3.5vh;
+  font-family: inherit;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border: none;
+}
+
+.track_select {
+  background-color: var(--dark_green);
+  margin-right: 3vw;
+}
+
+.type_select {
+  border-top-right-radius: 2.8vh;
+  background-color: var(--light_green);
+}
+
+.image_container {
+  height: 100%;
+  width: 8vh;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+option {
+  background-color: var(--background);
+  color: black;
+}
+
+.fields_container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4vh;
+}
+
+.time_select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time_select .label_box {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 2.5/1;
+  font-size: 3.5vh;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[type="time"] {
+  border: black dashed;
+  border-radius: 5vh;
+  
+  height: 8vh;
+  width: auto;
+  aspect-ratio: 11/1;
+
+  font-size: 3.5vh;
+  justify-items: center;
+  cursor: pointer;
+}
+
+#add_step {
+  height: 8vh;
+  width: 8vh;
+  border: none;
+  background-color: var(--dark_green);
+  border-radius: 4vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--background);
+
+  margin-top: 4vh;
+}
+
+#add_step:hover {
+  cursor: pointer;
+}
+
+#add_step:active {
+  background-color: var(--light_green);
+  color: black;
 }
