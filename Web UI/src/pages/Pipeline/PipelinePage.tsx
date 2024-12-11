@@ -7,8 +7,8 @@ const Pipeline = () => {
 
   return (
     <main id="pipline_page">
-      {pipeline.map((pipeline, index) => (
-        <PipelineStep pipeline={pipeline} key={index} />
+      {pipeline.map((pipeline) => (
+        <PipelineStep pipeline={pipeline} key={pipeline.id} />
       ))}
 
       <div onClick={handleAddStep} id="add_step">

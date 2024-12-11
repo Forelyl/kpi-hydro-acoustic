@@ -250,7 +250,6 @@ h1 {
   }
 }
 
-
 #pipline_page {
   display: flex;
   flex-direction: column;
@@ -266,10 +265,9 @@ h1 {
   align-self: center;
   display: flex;
   flex-direction: column;
-  
+
   border: solid black;
   border-radius: 3vh;
-
 }
 
 .top_part {
@@ -378,16 +376,16 @@ option {
   width: auto;
   aspect-ratio: 2.5/1;
   font-size: 3.5vh;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-[type="time"] {
+[type='time'] {
   border: black dashed;
   border-radius: 5vh;
-  
+
   height: 8vh;
   width: auto;
   aspect-ratio: 11/1;
@@ -419,4 +417,22 @@ option {
 #add_step:active {
   background-color: var(--light_green);
   color: black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time-input {
+  width: 2ch;
+  border: none;
+  outline: none;
+}
+
+.time-input-wrapper {
+  padding: 0.5rem;
+  border: 2px dotted black;
+  border-radius: 21px;
 }
