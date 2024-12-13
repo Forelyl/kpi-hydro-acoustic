@@ -9,6 +9,7 @@ const FileInputField = () => {
   return (
     <DndContext>
       <div {...droppableAreaProps} id="file_input">
+        <div></div>
         <span>{filename}</span>
         <input
           type="file"

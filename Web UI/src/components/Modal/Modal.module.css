@@ -23,6 +23,47 @@
   position: relative;
   padding: 20px;
   background-color: white;
-  max-width: 600px;
+  width: auto;
+  height: 40vh;
+  aspect-ratio: 5.2/3;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > button {
+    width: auto;
+    height: 8vh;
+    aspect-ratio: 5/1;
+  
+    align-self: center;
+  
+    border: none;
+    border-radius: 5vh;
+    background-color: var(--dark_green);
+  
+    font-size: 4vh;
+    font-weight: 500;
+    color: var(--background);
+    cursor: pointer;
+
+    margin-top: 2vh;
+  }
+
+  > button:active {
+    background-color: var(--light_green);
+    color: black;
+  }
+
+  > h2 {
+    font-family: 'Krona One', sans-serif;
+    font-size: 4.9vh;
+    margin: 0 0 3vh 0;
+  }
+
+  > p {
+    font-size: 2.9vh;
+    margin: 3vh 0 3vh 0;
+  }
 }

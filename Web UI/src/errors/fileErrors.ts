@@ -1,4 +1,4 @@
-type ErrorType = 'INVALID_FORMAT' | 'MANY_FILES';
+type ErrorType = 'INVALID_FORMAT' | 'MANY_FILES' | 'LOAD_FAILED';
 
 export interface FileError {
   type: ErrorType;
@@ -16,5 +16,10 @@ export const fileErrors: Record<ErrorType, FileError> = {
     type: 'MANY_FILES',
     title: 'Too many files',
     message: 'You can only upload one file'
+  },
+  LOAD_FAILED: {
+    type: 'LOAD_FAILED',
+    title: 'Can not laod file',
+    message: 'Could not fully load file and get its duration'
   }
 };
