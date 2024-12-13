@@ -62,3 +62,6 @@ try:
     print("Valid:", obj_c)
 except ValidationError as e:
     print("Error:", e.json())
+
+for i in range(12, 15):
+    print('*' * i)
