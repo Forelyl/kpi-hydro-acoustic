@@ -51,6 +51,11 @@ class Function_call(BaseModel):
             else:
                 raise ValueError("Input track is specified, yet shouldn't be such")
 
+        for i in range(len(tracks)): # TODO: try to add check on correct id
+            tracks[i] -= 1
+
+        return tracks
+
     # ---
 
     __INT_CHECK                : ClassVar[RootModel] = RootModel[int]
@@ -69,7 +74,7 @@ class Function_call(BaseModel):
         (__POSITIVE_FLOAT_CHECK, __POSITIVE_FLOAT_CHECK),                               # 03
         (__FLOAT_CHECK,),                                                               # 04
         (__NON_NEGATIVE_FLOAT_CHECK,),                                                  # 05
-        (__FLOAT_CHECK,),                                                               # 06
+        (),                                                                             # 06
         (__FLOAT_CHECK,),                                                               # 07
         (__TIME_CHECK, __TIME_CHECK),                                                   # 08
         (__TRACK_CHARACTER_CHECK, __TRACK_CHARACTER_CHECK, __TRACK_CHARACTER_CHECK),    # 09

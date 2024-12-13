@@ -18,6 +18,7 @@ async def get_number_test():
 
 async def pipeline_from_form(pipeline: Annotated[str, Form()]) -> Pipeline:
     try:
+        print(pipeline)
         return Pipeline.model_validate_json(pipeline, strict=True)
     except ValidationError as e:
         raise HTTPException(

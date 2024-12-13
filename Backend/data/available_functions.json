@@ -118,15 +118,7 @@
         "name":        "Noise filtering",
         "description": "Separates signal into signal and noise section, than reduce noise value for selected amount of dB",
         "func_type":   "Data modifier",
-        "args": [
-            {
-                "name":        "Level",
-                "description": "Decrement in decibels (0 dB means nothing will be changed, default value = -3 dB)",
-                "datatype":    "Float",
-                "units":       "dB",
-                "default":     -3.0
-            }
-        ],
+        "args": [],
         "choose_track": true
     },
 
