@@ -1,5 +1,5 @@
 import { IPipelineStep } from '../../../hooks/usePipeline';
-import TimeBounds from '../TimeBounds/TimeBounds';
+import PipelineStepBody from './PipelineStepBody';
 import PipelineStepHeader from './PipelineStepHeader';
 
 interface Props {
@@ -10,7 +10,7 @@ const PipelineStep = ({ step }: Props) => {
   return (
     <div className="pipline_step">
       <PipelineStepHeader step={step} />
-      <TimeBounds />
+      <PipelineStepBody step={step} />
     </div>
   );
 };

@@ -2,13 +2,20 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 type FuncType = 'Data modifier' | 'Graphical' | 'Copy';
 
+export interface IAnalyzeTypeArg {
+  datatype: string;
+  description: string;
+  name: string;
+  units: string;
+}
+
 export interface IAnalyzeType {
   choose_track: boolean;
   description: string;
   func_type: FuncType;
   id: number;
   name: string;
-  args: unknown;
+  args: IAnalyzeTypeArg[];
 }
 
 export const pipelineApi = createApi({
