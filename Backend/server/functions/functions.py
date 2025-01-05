@@ -184,9 +184,14 @@ class Audio_track:
 
     def __low_pass(self, args: list[Any]):
         pivotal_frequency: float = args[0] # Hz
-        ora = numpy.signal.butter(N=1, Wn=pivotal_frequency, fs=self.sample_rate, btype='lowpass', output='sos')
-        self.time_domain_track = numpy.signal.sosfilt(self.time_domain_track, ora)
-        return
+        # ora = scipy.signal.butter(N=30, Wn=pivotal_frequency, fs=self.sample_rate, btype='lowpass', output='sos')
+        # self.time_domain_track = scipy.signal.sosfilt(self.time_domain_track, ora)
+        # return
+
+
+
+
+
 
         allpass_res = self.__all_pass(self.time_domain_track, pivotal_frequency, self.sample_rate)
         self.time_domain_track = self.time_domain_track + allpass_res
