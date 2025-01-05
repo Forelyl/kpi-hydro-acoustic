@@ -6,13 +6,15 @@ interface State {
   fileDuration: number;
   separateTracks: boolean;
   error: FileError | null;
+  channels: number;
 }
 
 const initialState: State = {
   file: null,
   fileDuration: 0,
   separateTracks: false,
-  error: null
+  error: null,
+  channels: 0
 };
 
 const loadedFileSlice = createSlice({
@@ -33,6 +35,9 @@ const loadedFileSlice = createSlice({
     },
     resetError: (state) => {
       state.error = null;
+    },
+    setFileChannels: (state, action: PayloadAction<number>) => {
+      state.channels = action.payload;
     }
   }
 });
@@ -42,6 +47,7 @@ export const {
   setFileDuration,
   setSeparateTracks,
   setFileError,
-  resetError
+  resetError,
+  setFileChannels
 } = loadedFileSlice.actions;
 export default loadedFileSlice.reducer;
