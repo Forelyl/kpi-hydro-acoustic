@@ -172,54 +172,28 @@
 
 
 
+
     {
         "id": 9,
-        "name":        "3D Signal diagram",
-        "description": "Projection of three-dimensional space onto a two-dimensional plane, where the third coordinate axis is represented by a color change",
+        "name":        "3D TFA Plot",
+        "description": "Time-Frequency-Amplitude heatmap with amplitude represented as color changes",
         "func_type":   "Graphical",
-        "args": [
-            {
-                "name":        "x-axis",
-                "description": "Characteristics that is been represented by x-axis",
-                "datatype":    "Track characteristics",
-                "units":       ""
-            },
-            {
-                "name":        "y-axis",
-                "description": "Characteristics that is been represented by y-axis",
-                "datatype":    "Track characteristics",
-                "units":       ""
-            },
-            {
-                "name":        "z-axis",
-                "description": "Characteristics that is been represented by z-axis",
-                "datatype":    "Track characteristics",
-                "units":       ""
-            }
-        ],
+        "args": [],
         "choose_track": true
     },
     {
         "id": 10,
-        "name":        "2D Signal diagram",
-        "description": "Graph with two axes with corresponding data",
+        "name":        "2D Signal spectogram",
+        "description": "Frequency-Amplitude 2d plot",
         "func_type":   "Graphical",
-        "args": [
-            {
-                "name":        "x-axis",
-                "description": "Characteristics that is been represented by x-axis",
-                "datatype":    "Track characteristics",
-                "units":       ""
-            },
-            {
-                "name":        "y-axis",
-                "description": "Characteristics that is been represented by y-axis",
-                "datatype":    "Track characteristics",
-                "units":       ""
-            }
-        ],
+        "args": [],
         "choose_track": true
     },
+
+
+
+
+
 
 
 
