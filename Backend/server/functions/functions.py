@@ -1,5 +1,5 @@
 from enum import Enum
-from functions.data_classes import Pipeline, Function_call, Track_characteristic, Time
+from functions.data_classes import Pipeline, Function_call, Time # Track_characteristic,
 from fastapi import UploadFile
 from io import BytesIO
 import scipy
@@ -7,15 +7,16 @@ import numpy
 from typing import Any
 from noisereduce import reduce_noise
 import zipfile
-from functions.utils import pseudo_zip_result
+import copy
 from matplotlib import pyplot as plt
+# from functions.utils import pseudo_zip_result
+
 
 def make_pipeline(track: UploadFile, pipeline: Pipeline, to_separate_track: bool) -> BytesIO:
     tracks: list[Audio_track] | Audio_track = Audio_track.from_wav(track, to_separate_track)
     images: list[BytesIO] = [] # has duplication names
-    print(type(tracks[0].time_domain_track[0]))
-    for function in pipeline.pipeline: # TODO: use async to make it faster
-        image = Audio_track.use_function(tracks, function)
+    for i in range(len(pipeline.pipeline)):
+        image = Audio_track.use_function(tracks, pipeline.pipeline[i], i)
         if image is not None:
             images.append(image)
 
@@ -26,7 +27,6 @@ def make_pipeline(track: UploadFile, pipeline: Pipeline, to_separate_track: bool
     byte_tracks = [
         BytesIO() for _ in tracks  # Create a new BytesIO object for each track
     ]
-
 
     # Write WAV data to each BytesIO object
     for byte_track, track in zip(byte_tracks, tracks):
@@ -85,8 +85,26 @@ class Audio_track:
         self.time_domain_track = self.time_domain_track.astype(numpy.int16)
 
     @staticmethod
-    def use_function(tracks: list['Audio_track'], function: Function_call) -> BytesIO | None:
+    def use_function(tracks: list['Audio_track'], function: Function_call, function_num: int) -> BytesIO | None:
+        return Audio_track.use_function_lambda(tracks, function, function_num)
+
+    @staticmethod
+    def set_use_function(is_debug: bool) -> None:
+        if is_debug:
+            Audio_track.use_function_lambda = Audio_track.use_function_debug
+        else:
+            Audio_track.use_function_lambda = Audio_track.use_function_release
+
+    @staticmethod
+    def get_check_track_for_function_call(tracks: list['Audio_track'], function: Function_call) -> tuple['Audio_track', int]:
+        '''
+        returns track that was asked by function and last coordinate in tracks (to use in functions that multiply tracks)
+        '''
         track_list = tracks
+
+        # decompose track list from list of tracks and lists
+        # tracks = [track0, [track1_1, track1_2]]
+        # result track_list = [track1_1, track1_2] and check of fucntion call
         for i in range(len(function.track) - 1):
             if i >= len(track_list):
                 raise ValueError("Track id is out of range")
@@ -96,11 +114,67 @@ class Audio_track:
         if track_id >= len(track_list):
             raise ValueError("Track id is out of range")
 
+        return track_list[track_id], track_id
+
+    @staticmethod
+    def use_function_release(tracks: list['Audio_track'], function: Function_call, unused: int) -> BytesIO | None:
+        track, track_id = Audio_track.get_check_track_for_function_call(tracks, function)
+
         if function.id == Function_type.COPY:
-            track_list[track_id] = Audio_track.__copy(track_list[track_id], function.args)
+            tracks[track_id] = Audio_track.__copy(track, function.args)
             return None
         else:
-            return track_list[track_id].__function_call(function)
+            return track.__function_call(function)
+
+    @staticmethod
+    def use_function_debug(tracks: list['Audio_track'], function: Function_call, function_num: int) -> BytesIO | None:
+        # overhead of double check in debug and in release functions - don't use in production
+        _, track_id = Audio_track.get_check_track_for_function_call(tracks, function)
+
+        copy_of_track = copy.deepcopy(tracks[track_id])
+
+        result: BytesIO | None = Audio_track.use_function_release(tracks, function, function_num)
+        if result is BytesIO:
+            return result
+
+        # make plot
+        try:
+            y1 = copy_of_track.time_domain_track
+            y2 = tracks[track_id].time_domain_track
+
+            # Create time axes for plotting
+            time = numpy.linspace(0, len(y1) / copy_of_track.sample_rate, len(y1))
+
+            # Plot the waveforms
+            plt.figure(figsize=(15, 6))
+
+            plt.subplot(2, 1, 1)
+            plt.plot(time, y1, color='blue')
+            plt.title('Waveform of Track 1')
+            plt.xlabel('Time (s)')
+            plt.ylabel('Amplitude')
+
+            plt.subplot(2, 1, 2)
+            plt.plot(time, y2, color='green')
+            plt.title('Waveform of Track 2')
+            plt.xlabel('Time (s)')
+            plt.ylabel('Amplitude')
+
+            plt.tight_layout()
+
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            buffer.seek(0)
+            buffer.name = f"plot{function_num}.png"
+            plt.close()
+            return buffer
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+        return None
+
+    # -------------------------------------------------------------
 
     def __function_call(self, function: Function_call) -> BytesIO | None:
         match function.id:
@@ -188,11 +262,6 @@ class Audio_track:
         # self.time_domain_track = scipy.signal.sosfilt(self.time_domain_track, ora)
         # return
 
-
-
-
-
-
         allpass_res = self.__all_pass(self.time_domain_track, pivotal_frequency, self.sample_rate)
         self.time_domain_track = self.time_domain_track + allpass_res
 
@@ -276,4 +345,12 @@ class Audio_track:
         pass
 
     def __xy_diagram(self, args: list[Any]) -> BytesIO:
+        pass
+
+    @staticmethod
+    def debug_tracks_to_plot(tracks: list['Audio_track']) -> BytesIO:
+        pass
+
+    @staticmethod
+    def debug_track_to_plot(track: 'Audio_track') -> BytesIO:
         pass
