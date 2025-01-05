@@ -7,8 +7,8 @@
 
 body {
   margin: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 #root {
@@ -21,8 +21,8 @@ body {
 
   display: grid;
   grid-template-rows: 18vh 1fr;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 header {
@@ -362,10 +362,14 @@ option {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-left: 15vh;
+  padding-right: 15vh;
   gap: 4vh;
 }
 
 .time_select {
+  width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -373,26 +377,26 @@ option {
 
 .time_select .label_box {
   height: 100%;
-  width: auto;
-  aspect-ratio: 2.5/1;
+  width: 100%; 
   font-size: 3.5vh;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-[type='time'] {
+.time-input-wrapper {
   border: black dashed;
   border-radius: 5vh;
-
   height: 8vh;
   width: auto;
   aspect-ratio: 11/1;
+  padding: 0 10px 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 3.5vh;
-  justify-items: center;
-  cursor: pointer;
+  margin-left: auto;
 }
 
 #add_step {
@@ -426,13 +430,8 @@ input::-webkit-inner-spin-button {
 }
 
 .time-input {
-  width: 2ch;
   border: none;
   outline: none;
-}
-
-.time-input-wrapper {
-  padding: 0.5rem;
-  border: 2px dotted black;
-  border-radius: 21px;
+  text-align: center;
+  font-size: 3.5vh;
 }
