@@ -18,7 +18,7 @@ const PipelineStepHeader = ({ step }: Props) => {
         </div>
       </div>
       <div>
-        {!!step.analyzeType?.choose_track && <TrackSelect />}
+        {!!step.analyzeType?.choose_track && <TrackSelect step={step} />}
         <AnalyzeTypeSelect step={step} />
       </div>
     </div>
