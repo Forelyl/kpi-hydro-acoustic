@@ -1,4 +1,4 @@
-import PipelineStep from './PipelineStep';
+import PipelineStep from './PipelineStep/PipelineStep';
 import usePipeline from '../../hooks/usePipeline';
 import PlusIcon from '../../components/icons/PlusIcon';
 
@@ -7,8 +7,8 @@ const Pipeline = () => {
 
   return (
     <main id="pipline_page">
-      {pipeline.map((pipeline) => (
-        <PipelineStep pipeline={pipeline} key={pipeline.id} />
+      {pipeline.map((step) => (
+        <PipelineStep step={step} key={step.id} />
       ))}
 
       <div onClick={handleAddStep} id="add_step">

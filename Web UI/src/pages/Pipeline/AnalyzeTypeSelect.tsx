@@ -1,21 +1,37 @@
+import { ChangeEvent } from 'react';
 import SelectOpenIcon from '../../components/icons/SelectOpenIcon';
 import { useGetAnalizeTypesQuery } from '../../store/pipelineApi';
+import { IPipelineStep } from '../../hooks/usePipeline';
 
-const AnalyzeTypeSelect = () => {
-  const { data: analizeTypes, isLoading, error } = useGetAnalizeTypesQuery();
+interface Props {
+  step: IPipelineStep;
+}
 
-  if (error) console.log(error);
-  console.log(analizeTypes);
+const AnalyzeTypeSelect = ({ step }: Props) => {
+  const { data: analizeTypes, isLoading } = useGetAnalizeTypesQuery();
+
+  const handleSelectAnalyzeType = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (analizeTypes && !isLoading) {
+      step.setAnalyzeType(
+        analizeTypes.find((type) => type.name === e.target.value)!
+      );
+    }
+  };
 
   return (
     <div className="select_container type_select">
-      <select defaultValue="Analyze type" className="select ">
+      <select
+        onChange={handleSelectAnalyzeType}
+        defaultValue="Analyze type"
+        className="select ">
         <option hidden>Analyze type</option>
 
         {!isLoading &&
           analizeTypes?.length &&
-          analizeTypes.map((type, index) => (
-            <option key={index} value={index}></option>
+          analizeTypes.map((type) => (
+            <option key={type.id} value={type.name}>
+              {type.name}
+            </option>
           ))}
       </select>
       <div className="image_container">
