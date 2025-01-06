@@ -11,8 +11,6 @@ interface Props {
 
 const renderInputField = (datatype: string, setData: (_: number) => void) => {
   const handlePositiveFloat = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    if (!+e.target.value) e.target.value = '';
     setData(+e.target.value);
   };
 
@@ -21,7 +19,6 @@ const renderInputField = (datatype: string, setData: (_: number) => void) => {
   };
 
   const handleNonNegativeFloat = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setData(+e.target.value);
   };
 
@@ -29,11 +26,20 @@ const renderInputField = (datatype: string, setData: (_: number) => void) => {
     case 'Time':
       return <TimeInput onChange={setData} />;
     case 'Positive float':
-      return <input onChange={handlePositiveFloat} type="number" required />;
+      return (
+        <input onChange={handlePositiveFloat} min={0} type="number" required />
+      );
     case 'Float':
       return <input onChange={handleFloat} type="number" required />;
     case 'Non negative float':
-      return <input onChange={handleNonNegativeFloat} type="number" required />;
+      return (
+        <input
+          onChange={handleNonNegativeFloat}
+          min={0}
+          type="number"
+          required
+        />
+      );
     default:
       return <div>Not implemented</div>;
   }
