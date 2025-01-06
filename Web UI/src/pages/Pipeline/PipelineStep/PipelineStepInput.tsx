@@ -9,7 +9,10 @@ interface Props {
   index: number;
 }
 
-const renderInputField = (datatype: string, setData: (_: number) => void) => {
+const renderInputField = (
+  datatype: string,
+  setData: (_: number | Record<string, number>) => void
+) => {
   const handlePositiveFloat = (e: ChangeEvent<HTMLInputElement>) => {
     setData(+e.target.value);
   };
@@ -46,11 +49,12 @@ const renderInputField = (datatype: string, setData: (_: number) => void) => {
 };
 
 const PipelineStepInput = ({ arg, index, step }: Props) => {
-  const handleSetData = (index: number) => (data: number) => {
-    const newData = [...(step.data ?? [])];
-    newData[index] = data;
-    step.setData(newData);
-  };
+  const handleSetData =
+    (index: number) => (data: number | Record<string, number>) => {
+      const newData = [...(step.data ?? [])];
+      newData[index] = data;
+      step.setData(newData);
+    };
 
   return (
     <div className="time_select">

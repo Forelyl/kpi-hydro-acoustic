@@ -1,7 +1,7 @@
 import useTimeBounds from '../../hooks/useTimeBounds';
 
 interface Props {
-  onChange: (_: number) => void;
+  onChange: (_: number | Record<string, number>) => void;
 }
 
 const TimeInput = ({ onChange }: Props) => {
