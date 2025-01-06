@@ -287,9 +287,8 @@ h1 {
 }
 
 .pipline_step {
-  width: auto;
-  height: 38vh;
-  aspect-ratio: 4.5/1;
+  width: 70%;
+  height: 100%;
   margin-top: 5vh;
 
   align-self: center;
@@ -308,7 +307,7 @@ h1 {
   border: solid black;
   border-radius: 3vh;
   border-bottom-right-radius: 0px;
-  margin: -3px;
+  /* margin: -3px; */
 
   > div {
     display: flex;
@@ -392,9 +391,8 @@ option {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-left: 15vh;
-  padding-right: 15vh;
-  gap: 4vh;
+  padding: 0 15vh;
+  /* gap: 4vh; */
 }
 
 .time_select {
@@ -413,6 +411,9 @@ option {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  margin: 4vh 0;
+
 }
 
 .time-input-wrapper {
@@ -420,7 +421,7 @@ option {
   border-radius: 5vh;
   height: 8vh;
   width: auto;
-  aspect-ratio: 11/1;
+  /* aspect-ratio: 11/1; */
   padding: 0 10px 0 10px;
   display: flex;
   align-items: center;
@@ -428,6 +429,8 @@ option {
 
   margin-left: auto;
 }
+
+
 
 #add_step {
   height: 8vh;

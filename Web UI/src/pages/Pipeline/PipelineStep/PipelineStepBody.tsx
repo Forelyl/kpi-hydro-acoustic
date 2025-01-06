@@ -8,8 +8,13 @@ interface Props {
 const PipelineStepBody = ({ step }: Props) => {
   return (
     <div className="fields_container">
-      {step.analyzeType?.args.map((arg) => (
-        <PipelineStepInput key={`${step.id}-${arg.name}`} arg={arg} />
+      {step.analyzeType?.args.map((arg, index) => (
+        <PipelineStepInput
+          key={`${step.id}-${arg.name}`}
+          step={step}
+          arg={arg}
+          index={index}
+        />
       ))}
     </div>
   );

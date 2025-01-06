@@ -1,15 +1,7 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useAppSelector } from '../store/store';
 
-const useTimeBounds = (onChange: Dispatch<SetStateAction<number>>) => {
+const useTimeBounds = (onChange: (_: number) => void) => {
   const { fileDuration } = useAppSelector((state) => state.loadedFile);
   const [time, setTime] = useState({ minutes: 0, seconds: 0 });
 
