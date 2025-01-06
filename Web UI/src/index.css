@@ -257,7 +257,7 @@ h1 {
   cursor: pointer;
 }
 
-#upload_button:enabled:active {
+#upload_button:enabled:hover {
   background-color: var(--light_green);
   color: black;
 }
