@@ -13,7 +13,7 @@ class Function_call(BaseModel):
 
     # ---
 
-    id:    Annotated[int, Field(ge=__MIN_ID, le=__MAX_ID)]   # should be before track and args for validation
+    function_id:    Annotated[int, Field(ge=__MIN_ID, le=__MAX_ID)]   # should be before track and args for validation
     track: list[int]                   # should be after id for validation
     args:  list                        # should be after id for validation
 
