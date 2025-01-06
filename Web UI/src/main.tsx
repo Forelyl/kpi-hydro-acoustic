@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       { index: true, element: <AddFilePage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'pipeline', element: <PipelinePage /> },
-      { path: 'downlaod', element: <DownloadResultPage /> }
+      { path: 'download', element: <DownloadResultPage /> }
     ]
   }
 ]);
