@@ -37,6 +37,7 @@ class Function_call(BaseModel):
     @field_validator("track")
     @classmethod
     def __check_tracks(cls, tracks: list[int] | None, info: ValidationInfo):
+        print("Incorrect value: ", info.data["id"])
         use_explicit = tracks is not None
         if cls.__USE_EXPLICIT_TRACK[info.data["id"]] != use_explicit:
             if cls.__USE_EXPLICIT_TRACK[info.data["id"]]:
