@@ -9,7 +9,7 @@ import {
 } from '../store/loadedFileSlice';
 import { fileErrors } from '../errors/fileErrors';
 
-export const acceptedFileTypes = 'audio/wav, audio/mp3';
+export const acceptedFileTypes = 'audio/wav';
 
 const useFileInput = () => {
   const dispatch = useAppDispatch();

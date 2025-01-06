@@ -27,7 +27,7 @@ body {
 
 header {
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: 1fr 5fr auto;
   align-items: center;
   justify-items: center;
   padding: 0 5vh 0 5vh;
@@ -46,6 +46,10 @@ header {
     height: 7vh;
     cursor: pointer;
   }
+
+  > #header-header-nav {
+    color: var(--background);
+  }
 }
 
 .green_text {
@@ -61,8 +65,11 @@ h1 {
 #add_file_page {
   display: flex;
   flex-direction: column;
+  height: 82vh;
 
   > a {
+    flex-grow: auto;
+
     height: 6vh;
     width: 6vh;
 
@@ -77,6 +84,7 @@ h1 {
     text-align: center;
     text-decoration: none;
     font-size: 3vh;
+
 
     :visited {
       color: black;
@@ -104,10 +112,17 @@ h1 {
   }
 
   > span {
+    height: 4vh;
     font-size: 4vh;
+    line-height: 4vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     font-weight: 500;
     flex: 5 10 auto;
     text-align: center;
+    justify-self: center;
+    justify-content: center;
   }
 
   * {
@@ -242,7 +257,7 @@ h1 {
   cursor: pointer;
 }
 
-#upload_button:enabled:active {
+#upload_button:enabled:hover {
   background-color: var(--light_green);
   color: black;
 }
@@ -390,7 +405,7 @@ option {
 
 .time_select .label_box {
   height: 100%;
-  width: 100%; 
+  width: 100%;
   font-size: 3.5vh;
 
   display: flex;
