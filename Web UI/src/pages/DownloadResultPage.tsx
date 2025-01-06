@@ -23,7 +23,7 @@ const DownloadResult = ({ zipFileName = 'results.zip' }: Props) => {
     <div id="download_page">
       <img id="download_image" src="waveform-icon.svg" alt="SoundWave" />
       <button onClick={handleDownload} disabled={!resultZip} id='download_button'>
-        {resultZip ? 'Download ZIP' : 'Loading...'}
+        Download ZIP
       </button>
     </div>
   );

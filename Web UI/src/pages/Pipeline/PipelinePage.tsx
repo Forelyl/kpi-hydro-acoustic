@@ -15,6 +15,8 @@ import { pipelineErrors } from '../../errors/pipelineErrors';
 
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
+  const [sendPipeline, { isLoading }] = useSendPipelineMutation();
+  const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
   const [sendPipeline] = useSendPipelineMutation();
   const { file, separateTracks, error } = useAppSelector(
     (state) => state.loadedFile
@@ -50,17 +52,16 @@ const Pipeline = () => {
       })
       .catch(console.error);
   };
-
   return (
     <main id="pipline_page">
       {pipeline.map((step) => (
         <PipelineStep step={step} key={step.id} />
       ))}
 
-      <div onClick={handleAddStep} id="add_step">
+      <div onClick={handleAddStep} className="add_step">
         <PlusIcon />
       </div>
-      <div onClick={handleSendPipeline} id="add_step">
+      <div onClick={handleSendPipeline} className="add_step">
         <SendIcon />
       </div>
       <Modal open={!!error}>
@@ -68,6 +69,13 @@ const Pipeline = () => {
         <p>{error?.message}</p>
         <button onClick={() => dispatch(resetError())}>OK</button>
       </Modal>
+      {isLoading ? (
+        <div>
+          <h3>Analyzing...</h3>
+        </div>
+      ) : (
+        <></>
+      )}
     </main>
   );
 };
