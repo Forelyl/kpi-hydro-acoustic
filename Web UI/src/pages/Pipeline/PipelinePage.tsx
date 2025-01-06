@@ -16,8 +16,6 @@ import { pipelineErrors } from '../../errors/pipelineErrors';
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
   const [sendPipeline, { isLoading }] = useSendPipelineMutation();
-  const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
-  const [sendPipeline] = useSendPipelineMutation();
   const { file, separateTracks, error } = useAppSelector(
     (state) => state.loadedFile
   );
