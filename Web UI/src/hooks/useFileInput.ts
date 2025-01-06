@@ -2,10 +2,10 @@ import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { useDroppable } from '@dnd-kit/core';
 import {
+  setError,
   setFile,
   setFileChannels,
-  setFileDuration,
-  setFileError
+  setFileDuration
 } from '../store/loadedFileSlice';
 import { fileErrors } from '../errors/fileErrors';
 
@@ -26,7 +26,7 @@ const useFileInput = () => {
     (newFile?: File | null) => {
       if (newFile && newFile.name !== file?.name) {
         if (!acceptedFileTypes.includes(newFile.type)) {
-          dispatch(setFileError(fileErrors.INVALID_FORMAT));
+          dispatch(setError(fileErrors.INVALID_FORMAT));
           return;
         }
 
@@ -46,7 +46,7 @@ const useFileInput = () => {
                 .decodeAudioData(xhr.response as ArrayBuffer)
                 .then((res) => dispatch(setFileChannels(res.numberOfChannels)))
                 .catch((err) => {
-                  dispatch(setFileError(fileErrors.LOAD_FAILED));
+                  dispatch(setError(fileErrors.LOAD_FAILED));
                   console.log(err);
                 });
             };
@@ -59,7 +59,7 @@ const useFileInput = () => {
         audio.addEventListener(
           'error',
           () => {
-            dispatch(setFileError(fileErrors.LOAD_FAILED));
+            dispatch(setError(fileErrors.LOAD_FAILED));
             URL.revokeObjectURL(url);
           },
           { once: true }
@@ -80,7 +80,7 @@ const useFileInput = () => {
 
       if (e.dataTransfer?.files.length === 1)
         return handleSetFile(e.dataTransfer?.files.item(0));
-      dispatch(setFileError(fileErrors.MANY_FILES));
+      dispatch(setError(fileErrors.MANY_FILES));
     },
     [handleSetFile, dispatch]
   );
@@ -91,7 +91,7 @@ const useFileInput = () => {
 
       if (e.target.files?.length === 1)
         return handleSetFile(e.target.files?.item(0));
-      dispatch(setFileError(fileErrors.MANY_FILES));
+      dispatch(setError(fileErrors.MANY_FILES));
     },
     [handleSetFile, dispatch]
   );

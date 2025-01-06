@@ -5,12 +5,20 @@ import SendIcon from '../../components/icons/SendIcon';
 import { useSendPipelineMutation } from '../../store/pipelineApi';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { useNavigate } from 'react-router';
-import { setResultZip } from '../../store/loadedFileSlice';
+import {
+  resetError,
+  setError,
+  setResultZip
+} from '../../store/loadedFileSlice';
+import Modal from '../../components/Modal/Modal';
+import { pipelineErrors } from '../../errors/pipelineErrors';
 
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
   const [sendPipeline] = useSendPipelineMutation();
-  const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
+  const { file, separateTracks, error } = useAppSelector(
+    (state) => state.loadedFile
+  );
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -20,6 +28,13 @@ const Pipeline = () => {
       track: [step.track],
       args: step.data
     }));
+
+    for (const step of steps) {
+      if (!step.track[0]) {
+        dispatch(setError(pipelineErrors.NO_TRACK_SELECTED));
+        return;
+      }
+    }
 
     const formData = new FormData();
 
@@ -48,6 +63,11 @@ const Pipeline = () => {
       <div onClick={handleSendPipeline} id="add_step">
         <SendIcon />
       </div>
+      <Modal open={!!error}>
+        <h2>{error?.title}</h2>
+        <p>{error?.message}</p>
+        <button onClick={() => dispatch(resetError())}>OK</button>
+      </Modal>
     </main>
   );
 };

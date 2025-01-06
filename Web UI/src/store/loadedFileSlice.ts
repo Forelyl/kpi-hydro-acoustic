@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FileError } from '../errors/fileErrors';
+import { PipelineError } from '../errors/pipelineErrors';
 
 interface State {
   file: File | null;
   fileDuration: number;
   separateTracks: boolean;
-  error: FileError | null;
+  error: FileError | PipelineError | null;
   channels: number;
   resultZip: Blob | null;
 }
@@ -32,7 +33,7 @@ const loadedFileSlice = createSlice({
     setSeparateTracks: (state, action: PayloadAction<boolean>) => {
       state.separateTracks = action.payload;
     },
-    setFileError: (state, action: PayloadAction<FileError>) => {
+    setError: (state, action: PayloadAction<FileError | PipelineError>) => {
       state.error = action.payload;
     },
     resetError: (state) => {
@@ -51,7 +52,7 @@ export const {
   setFile,
   setFileDuration,
   setSeparateTracks,
-  setFileError,
+  setError,
   resetError,
   setFileChannels,
   setResultZip
