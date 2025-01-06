@@ -1,8 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
-import useTimeBounds from '../../../hooks/useTimeBounds';
+import useTimeBounds from '../../hooks/useTimeBounds';
 
 interface Props {
-  onChange: Dispatch<SetStateAction<number>>;
+  onChange: (_: number | Record<string, number>) => void;
 }
 
 const TimeInput = ({ onChange }: Props) => {

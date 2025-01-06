@@ -7,7 +7,7 @@ authors = ["Your Name <you@example.com>"]
 # package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.12.5"
 granian = {extras = ["reload"], version = "^1.6.4"}
 fastapi = {extras = ["standard"], version = "^0.115.6"}
 numpy = "^2.1.3"

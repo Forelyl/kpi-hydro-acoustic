@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from routers import debug, function_call, help
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -38,6 +38,7 @@ app.include_router(help.app)
 origins = [
     "http://localhost:6789",
     "http://localhost:5173",
+    "http://localhost:5174",
 ]
 
 app.add_middleware(

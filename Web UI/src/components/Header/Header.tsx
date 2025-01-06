@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate, Link} from 'react-router';
 import CloseIcon from '../icons/CloseIcon';
 import HeaderNavigation from './HeaderNavigation';
 
@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <header>
-      <img src="logo.svg" />
+      <Link to="/" draggable="false"><img src="logo.svg" draggable="false"/></Link>
       <h1>
         <span>Sound</span>
         <span className="green_text">Surface</span>
