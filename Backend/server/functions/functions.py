@@ -9,7 +9,6 @@ from noisereduce import reduce_noise
 import zipfile
 import copy
 from matplotlib import pyplot as plt
-import matplotlib
 import math
 # from functions.utils import pseudo_zip_result
 
@@ -346,7 +345,6 @@ class Audio_track:
 
     def __xyz_diagram_tfa(self, args: list[Any], function_num: int) -> BytesIO:
         # Perform Short-Time Fourier Transform (STFT) for time-frequency analysis
-        n = len(self.time_domain_track)
         segment_length = 1024  # Number of samples per segment
         overlap = segment_length // 2  # 50% overlap
         window = numpy.hamming(segment_length)
@@ -387,7 +385,6 @@ class Audio_track:
         plt.close()
 
         return buffer
-
 
     def __xy_diagram_fa(self, args: list[Any], function_num: int) -> BytesIO:
         # Perform FFT on the audio data
