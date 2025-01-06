@@ -30,6 +30,10 @@ export const pipelineApi = createApi({
     sendPipeline: builder.mutation({
       query: (body: FormData) => ({
         url: '/functions_call/',
+        responseHandler: (response) => response.blob(),
+        headers: {
+          Accept: 'application/zip'
+        },
         method: 'POST',
         body
       })
