@@ -1,17 +1,10 @@
 from pydantic import BaseModel, field_validator, Field, ValidationInfo, RootModel
 from typing import Annotated, Any, ClassVar
-from enum import Enum
 
 
 class Time(BaseModel):
     minutes: Annotated[int, Field(ge=0)]
     seconds: Annotated[int, Field(ge=0, lt=60)]
-
-
-class Track_characteristic(str, Enum):
-    Frequency = "frequency"
-    Amplitude = "amplitude"
-    Time      = "time"
 
 
 class Function_call(BaseModel):
@@ -65,7 +58,6 @@ class Function_call(BaseModel):
     __NON_NEGATIVE_FLOAT_CHECK : ClassVar[RootModel] = RootModel[Annotated[float, Field(ge=0.0)]]
     __TIME_CHECK               : ClassVar[RootModel] = RootModel[Time]
     __TRACK_CHECK              : ClassVar[RootModel] = RootModel[list[Annotated[int, Field(ge=0)]]]
-    __TRACK_CHARACTER_CHECK    : ClassVar[RootModel] = RootModel[Track_characteristic]
 
     __FUNCTIONS_ARGS: ClassVar[tuple[tuple[type]]] = (  # id is a position (counting from 0)
         (__POSITIVE_FLOAT_CHECK,),                                                      # 00
@@ -77,14 +69,14 @@ class Function_call(BaseModel):
         (),                                                                             # 06
         (__FLOAT_CHECK,),                                                               # 07
         (__TIME_CHECK, __TIME_CHECK),                                                   # 08
-        (__TRACK_CHARACTER_CHECK, __TRACK_CHARACTER_CHECK, __TRACK_CHARACTER_CHECK),    # 09
-        (__TRACK_CHARACTER_CHECK, __TRACK_CHARACTER_CHECK),                             # 10
+        (),                                                                             # 09
+        (),                                                                             # 10
         (__POSITIVE_INT_CHECK,)                                                         # 11
     )
 
     @field_validator("args")
     @classmethod
-    def __check_trait(cls, args: list[Any], validated_info: ValidationInfo) -> list[int | float | Time | Track_characteristic]:
+    def __check_trait(cls, args: list[Any], validated_info: ValidationInfo) -> list[int | float | Time]:
         checkers: tuple[type] = cls.__FUNCTIONS_ARGS[validated_info.data["id"]]
         if len(checkers) != len(args):
             raise ValueError("Wrong number of arguments")
