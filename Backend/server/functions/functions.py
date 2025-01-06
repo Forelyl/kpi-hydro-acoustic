@@ -345,60 +345,49 @@ class Audio_track:
         self.time_domain_track = self.time_domain_track[math.floor(start * self.sample_rate):math.floor(end * self.sample_rate)]
 
     def __xyz_diagram_tfa(self, args: list[Any], function_num: int) -> BytesIO:
-        # Perform Short-Time Fourier Transform (STFT) for time-frequency analysis
+    # Perform Short-Time Fourier Transform (STFT) for time-frequency analysis
         n = len(self.time_domain_track)
         segment_length = 1024  # Number of samples per segment
         overlap = segment_length // 2  # 50% overlap
-        window = numpy.hamming(segment_length)
+        window = np.hamming(segment_length)
 
-        # Compute STFT
-        freqs, times, Zxx = scipy.signal.stft(
-            self.time_domain_track,
-            fs=self.sample_rate,
-            window=window,
-            nperseg=segment_length,
-            noverlap=overlap,
-            boundary=None
-        )
+    # Compute STFT
+    freqs, times, Zxx = signal.stft(
+        self.time_domain_track,
+        fs=self.sample_rate,
+        window=window,
+        nperseg=segment_length,
+        noverlap=overlap,
+        boundary=None
+    )
 
-        # Compute magnitude and convert to dB scale
-        magnitude = numpy.abs(Zxx)
-        magnitude_db = 20 * numpy.log10(magnitude + numpy.finfo(float).eps)
+    # Compute magnitude and convert to dB scale
+    magnitude = np.abs(Zxx)
+    magnitude_db = 20 * np.log10(magnitude + np.finfo(float).eps)
 
-        # Plotting the 3D spectrogram
-        fig = plt.figure(figsize=(20, 10))
-        ax = fig.add_subplot(111, projection='3d')
+    # Plotting the heatmap spectrogram
+    fig, ax = plt.subplots(figsize=(20, 10))
 
-        # Create a meshgrid for time and frequency
-        X, Y = numpy.meshgrid(times, freqs)
+    # Create the heatmap
+    cax = ax.pcolormesh(times, freqs, magnitude_db, cmap='viridis', shading='gouraud')
 
-        # Plot the surface
-        surf = ax.plot_surface(
-            X, Y, magnitude_db,
-            cmap=matplotlib.cm.viridis,
-            linewidth=0,
-            antialiased=False
-        )
+    # Customize the plot
+    ax.set_title(f'Heatmap Spectrogram functioncall-{function_num + 1}')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Frequency (Hz)')
 
-        # Customize the plot
-        ax.set_title(f'3D Spectrogram functioncall-{function_num + 1}')
-        ax.set_xlabel('Time (s)')
-        ax.set_ylabel('Frequency (Hz)')
-        ax.set_zlabel('Amplitude (dB)')
-        ax.zaxis.set_major_locator(matplotlib.ticker.LinearLocator(10))
-        ax.zaxis.set_major_formatter('{x:.02f}')
+    # Add a color bar to indicate amplitude
+    fig.colorbar(cax, ax=ax, label='Amplitude (dB)')
 
-        # Add a color bar to indicate amplitude
-        fig.colorbar(surf, shrink=0.5, aspect=10)
+    # Save the plot to a buffer
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    buffer.name = f"Heatmap_Spectrogram_functioncall{function_num + 1}.png"
+    plt.close()
 
-        # Save the plot to a buffer
-        buffer = BytesIO()
-        plt.savefig(buffer, format='png')
-        buffer.seek(0)
-        buffer.name = f"3D_Spectrogram_functioncall{function_num + 1}.png"
-        plt.close()
+    return buffer
 
-        return buffer
 
     def __xy_diagram_fa(self, args: list[Any], function_num: int) -> BytesIO:
         # Perform FFT on the audio data
