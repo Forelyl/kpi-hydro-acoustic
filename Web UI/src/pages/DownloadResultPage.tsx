@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useAppSelector } from '../store/store';
 
-interface DownloadResultProps {
-  zipBlob: Blob;  // URL for the ZIP file
-  zipFileName?: string; // Optional: Custom name for the downloaded ZIP file
+interface Props {
+  zipFileName?: string;
 }
 
-const DownloadResult: React.FC<DownloadResultProps> = ({ zipBlob, zipFileName = 'results.zip' }) => {
-  // Handle download button click
+const DownloadResult = ({ zipFileName = 'results.zip' }: Props) => {
+  const { resultZip } = useAppSelector((state) => state.loadedFile);
+
   const handleDownload = () => {
-    if (zipBlob) {
-      const url = window.URL.createObjectURL(zipBlob);
+    if (resultZip) {
+      const url = window.URL.createObjectURL(resultZip);
       const a = document.createElement('a');
       a.href = url;
       a.download = zipFileName;
@@ -21,16 +21,12 @@ const DownloadResult: React.FC<DownloadResultProps> = ({ zipBlob, zipFileName = 
 
   return (
     <div id="download_page" style={{ textAlign: 'center', margin: '20px' }}>
-      <img src="waveform-icon.svg" alt="SoundWave"/>
-      <button
-        onClick={handleDownload}
-        disabled={!zipBlob}
-      >
-        {zipBlob ? 'Download ZIP' : 'Loading...'}
+      <img src="waveform-icon.svg" alt="SoundWave" />
+      <button onClick={handleDownload} disabled={!resultZip}>
+        {resultZip ? 'Download ZIP' : 'Loading...'}
       </button>
     </div>
   );
 };
 
 export default DownloadResult;
-

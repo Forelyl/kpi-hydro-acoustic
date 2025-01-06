@@ -3,12 +3,16 @@ import usePipeline from '../../hooks/usePipeline';
 import PlusIcon from '../../components/icons/PlusIcon';
 import SendIcon from '../../components/icons/SendIcon';
 import { useSendPipelineMutation } from '../../store/pipelineApi';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { useNavigate } from 'react-router';
+import { setResultZip } from '../../store/loadedFileSlice';
 
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
   const [sendPipeline] = useSendPipelineMutation();
   const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleSendPipeline = () => {
     const steps = pipeline.map((step) => ({
@@ -25,7 +29,10 @@ const Pipeline = () => {
 
     sendPipeline(formData)
       .unwrap()
-      .then((res) => console.log(res))
+      .then((res) => {
+        dispatch(setResultZip(res as Blob));
+        void navigate('/download');
+      })
       .catch(console.error);
   };
 

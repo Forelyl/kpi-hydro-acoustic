@@ -13,10 +13,7 @@ const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ['loadedFile/setFile'],
-        ignoredPaths: ['loadedFile.file']
-      }
+      serializableCheck: false
     }).concat(pipelineApi.middleware)
 });
 
