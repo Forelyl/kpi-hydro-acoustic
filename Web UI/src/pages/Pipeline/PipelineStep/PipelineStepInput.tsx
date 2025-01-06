@@ -1,15 +1,15 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { IAnalyzeTypeArg } from '../../../store/pipelineApi';
 import TimeInput from '../TimeInput';
+import { IPipelineStep } from '../../../hooks/usePipeline';
 
 interface Props {
   arg: IAnalyzeTypeArg;
+  step: IPipelineStep;
+  index: number;
 }
 
-const renderInputField = (
-  datatype: string,
-  setData: Dispatch<SetStateAction<number>>
-) => {
+const renderInputField = (datatype: string, setData: (_: number) => void) => {
   const handlePositiveFloat = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     if (!+e.target.value) e.target.value = '';
@@ -39,9 +39,12 @@ const renderInputField = (
   }
 };
 
-const PipelineStepInput = ({ arg }: Props) => {
-  const [data, setData] = useState<number>(0);
-  console.log(data);
+const PipelineStepInput = ({ arg, index, step }: Props) => {
+  const handleSetData = (index: number) => (data: number) => {
+    const newData = [...(step.data ?? [])];
+    newData[index] = data;
+    step.setData(newData);
+  };
 
   return (
     <div className="time_select">
@@ -50,7 +53,7 @@ const PipelineStepInput = ({ arg }: Props) => {
           {arg.name}
           {arg.units ? `, ${arg.units}` : ''}
         </label>
-        {renderInputField(arg.datatype, setData)}
+        {renderInputField(arg.datatype, handleSetData(index))}
       </div>
     </div>
   );

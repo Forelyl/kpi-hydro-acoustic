@@ -10,10 +10,9 @@ interface Props {
 const AnalyzeTypeSelect = ({ step }: Props) => {
   const { data: analizeTypes, isLoading } = useGetAnalizeTypesQuery();
 
-  console.log(analizeTypes);
-
   const handleSelectAnalyzeType = (e: ChangeEvent<HTMLSelectElement>) => {
     if (analizeTypes && !isLoading) {
+      step.setData([]);
       step.setAnalyzeType(
         analizeTypes.find((type) => type.name === e.target.value)!
       );
