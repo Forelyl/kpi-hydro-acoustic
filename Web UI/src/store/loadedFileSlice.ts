@@ -7,6 +7,7 @@ interface State {
   separateTracks: boolean;
   error: FileError | null;
   channels: number;
+  resultZip: Blob | null;
 }
 
 const initialState: State = {
@@ -14,7 +15,8 @@ const initialState: State = {
   fileDuration: 0,
   separateTracks: false,
   error: null,
-  channels: 0
+  channels: 0,
+  resultZip: null
 };
 
 const loadedFileSlice = createSlice({
@@ -38,6 +40,9 @@ const loadedFileSlice = createSlice({
     },
     setFileChannels: (state, action: PayloadAction<number>) => {
       state.channels = action.payload;
+    },
+    setResultZip: (state, action: PayloadAction<Blob>) => {
+      state.resultZip = action.payload;
     }
   }
 });
@@ -48,6 +53,7 @@ export const {
   setSeparateTracks,
   setFileError,
   resetError,
-  setFileChannels
+  setFileChannels,
+  setResultZip
 } = loadedFileSlice.actions;
 export default loadedFileSlice.reducer;

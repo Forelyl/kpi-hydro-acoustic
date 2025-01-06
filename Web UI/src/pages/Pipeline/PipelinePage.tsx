@@ -3,12 +3,16 @@ import usePipeline from '../../hooks/usePipeline';
 import PlusIcon from '../../components/icons/PlusIcon';
 import SendIcon from '../../components/icons/SendIcon';
 import { useSendPipelineMutation } from '../../store/pipelineApi';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { useNavigate } from 'react-router';
+import { setResultZip } from '../../store/loadedFileSlice';
 
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
   const [sendPipeline] = useSendPipelineMutation();
-  const { file } = useAppSelector((state) => state.loadedFile);
+  const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleSendPipeline = () => {
     const steps = pipeline.map((step) => ({
@@ -20,14 +24,16 @@ const Pipeline = () => {
     const formData = new FormData();
 
     formData.append('file', file!);
+    formData.append('separate', `${separateTracks}`);
+    formData.append('pipeline', `{"pipeline": ${JSON.stringify(steps)}}`);
 
-    steps.forEach((step, index) => {
-      formData.append(`steps[${index}][id]`, `${step.id}`);
-      formData.append(`steps[${index}][track]`, JSON.stringify(step.track));
-      formData.append(`steps[${index}][args]`, JSON.stringify(step.args));
-    });
-
-    sendPipeline(formData).unwrap().catch(console.error);
+    sendPipeline(formData)
+      .unwrap()
+      .then((res) => {
+        dispatch(setResultZip(res as Blob));
+        void navigate('/download');
+      })
+      .catch(console.error);
   };
 
   return (
