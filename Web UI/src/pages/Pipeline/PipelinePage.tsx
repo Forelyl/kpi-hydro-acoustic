@@ -2,17 +2,32 @@ import PipelineStep from './PipelineStep/PipelineStep';
 import usePipeline from '../../hooks/usePipeline';
 import PlusIcon from '../../components/icons/PlusIcon';
 import SendIcon from '../../components/icons/SendIcon';
+import { useSendPipelineMutation } from '../../store/pipelineApi';
+import { useAppSelector } from '../../store/store';
 
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
+  const [sendPipeline] = useSendPipelineMutation();
+  const { file } = useAppSelector((state) => state.loadedFile);
 
   const handleSendPipeline = () => {
-    const toSend = pipeline.map((step) => ({
+    const steps = pipeline.map((step) => ({
       id: step.analyzeType?.id,
       track: [step.track],
       args: step.data
     }));
-    console.log(toSend);
+
+    const formData = new FormData();
+
+    formData.append('file', file!);
+
+    steps.forEach((step, index) => {
+      formData.append(`steps[${index}][id]`, `${step.id}`);
+      formData.append(`steps[${index}][track]`, JSON.stringify(step.track));
+      formData.append(`steps[${index}][args]`, JSON.stringify(step.args));
+    });
+
+    sendPipeline(formData).unwrap().catch(console.error);
   };
 
   return (

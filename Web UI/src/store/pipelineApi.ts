@@ -26,8 +26,15 @@ export const pipelineApi = createApi({
     getAnalizeTypes: builder.query<IAnalyzeType[], void>({
       query: () => `/help/`,
       providesTags: ['AnalyzeTypes']
+    }),
+    sendPipeline: builder.mutation({
+      query: (body: FormData) => ({
+        url: '/function_call/',
+        method: 'POST',
+        body
+      })
     })
   })
 });
 
-export const { useGetAnalizeTypesQuery } = pipelineApi;
+export const { useGetAnalizeTypesQuery, useSendPipelineMutation } = pipelineApi;
