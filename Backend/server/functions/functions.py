@@ -1,5 +1,5 @@
 from enum import Enum
-from functions.data_classes import Pipeline, Function_call, Time
+from server.functions.data_classes import Pipeline, Function_call, Time
 from fastapi import UploadFile
 from io import BytesIO
 import scipy
@@ -125,7 +125,7 @@ class Audio_track:
             tracks[track_id] = Audio_track.__copy(track, function.args)
             return None
         else:
-            return track.__function_call(function, function_num)
+            return track.function_call(function, function_num)
 
     @staticmethod
     def use_function_debug(tracks: list['Audio_track'], function: Function_call, function_num: int) -> BytesIO | None:
@@ -226,7 +226,7 @@ class Audio_track:
                 return self.__xy_diagram_fa(function.args, function_num)
 
     @staticmethod
-    def copy(obj: 'Audio_track', params: list[Any]) -> list['Audio_track']:
+    def __copy(obj: 'Audio_track', params: list[Any]) -> list['Audio_track']:
         n = params[0]
         copies: list[Audio_track] = []
         time_domain = obj.time_domain_track
