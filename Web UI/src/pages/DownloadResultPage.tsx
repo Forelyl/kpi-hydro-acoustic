@@ -20,9 +20,9 @@ const DownloadResult = ({ zipFileName = 'results.zip' }: Props) => {
   };
 
   return (
-    <div id="download_page" style={{ textAlign: 'center', margin: '20px' }}>
-      <img src="waveform-icon.svg" alt="SoundWave" />
-      <button onClick={handleDownload} disabled={!resultZip}>
+    <div id="download_page">
+      <img id="download_image" src="waveform-icon.svg" alt="SoundWave" />
+      <button onClick={handleDownload} disabled={!resultZip} id='download_button'>
         {resultZip ? 'Download ZIP' : 'Loading...'}
       </button>
     </div>
