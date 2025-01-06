@@ -13,7 +13,7 @@ export interface IAnalyzeType {
   choose_track: boolean;
   description: string;
   func_type: FuncType;
-  id: number;
+  f_id: number;
   name: string;
   args: IAnalyzeTypeArg[];
 }
