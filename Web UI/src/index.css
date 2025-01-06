@@ -470,3 +470,7 @@ input::-webkit-inner-spin-button {
   text-align: center;
   font-size: 3.5vh;
 }
+
+#download_page {
+  background-color: rebeccapurple ;
+}
