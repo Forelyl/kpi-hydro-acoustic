@@ -344,6 +344,7 @@ h1 {
 .select {
   border: none;
   appearance: none;
+  border-radius: inherit;
   padding: 0 30px 0 30px;
   height: 100%;
   width: 100%;
@@ -365,7 +366,8 @@ h1 {
 }
 
 .type_select {
-  border-top-right-radius: 2.8vh;
+  border-top-right-radius: 2.4vh;
+  border-radius: 0 2.4vh 1.9vh 0;
   background-color: var(--light_green);
 }
 
