@@ -6,11 +6,12 @@ import { IPipelineStep } from '../../../hooks/usePipeline';
 
 interface Props {
   step: IPipelineStep;
+  emptyState: boolean;
 }
 
-const PipelineStepHeader = ({ step }: Props) => {
+const PipelineStepHeader = ({ step, emptyState }: Props) => {
   return (
-    <div className="top_part">
+    <div className= {`top_part ${emptyState ? "" : "body_empty"}`}>
       <div>
         <MenuIcon />
         <div onClick={() => step.removeSelf()}>
