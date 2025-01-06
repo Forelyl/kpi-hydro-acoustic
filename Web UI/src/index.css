@@ -477,5 +477,43 @@ input::-webkit-inner-spin-button {
 }
 
 #download_page {
-  background-color: rebeccapurple ;
+  display: flex;
+  flex-direction: column;
+  height: 82vh;
+  margin: 0;
+}
+
+#download_image {
+  height: 50vh;
+}
+
+#download_button {
+  width: auto;
+  height: 10vh;
+  aspect-ratio: 5/1;
+  margin-top: 5vh;
+
+  align-self: center;
+
+  border: none;
+  border-radius: 5vh;
+  background-color: var(--dark_green);
+
+  font-size: 4vh;
+  font-weight: 500;
+  color: var(--background);
+}
+
+#download_button:disabled {
+  background-color: var(--disabled_color);
+  color: rgba(0, 0, 0, 0.575);
+}
+
+#download_button:enabled {
+  cursor: pointer;
+}
+
+#download_button:enabled:hover {
+  background-color: var(--light_green);
+  color: black;
 }
