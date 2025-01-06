@@ -330,6 +330,10 @@ h1 {
   }
 }
 
+.top_part.body_empty {
+  border: none;
+}
+
 .select_container {
   position: relative;
   height: calc(9vh - 4px);
@@ -338,6 +342,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .select {
