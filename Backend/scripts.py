@@ -10,4 +10,4 @@ def start_server_prod():
 
 
 def start_test_web_selenium():
-    subprocess.run("poetry run pytest test/test_selenium.py")
+    subprocess.run("poetry run pytest test/test_selenium.py -v")
