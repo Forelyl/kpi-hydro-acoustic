@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from routers import debug, function_call, help
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -48,3 +48,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    print(f"Request Method: {request.method}")
+    print(f"Request URL: {request.url}")
+    body = await request.body()  # Read the request body
+    print(f"Request Body: {body}")
+    response = await call_next(request)
+    return response
