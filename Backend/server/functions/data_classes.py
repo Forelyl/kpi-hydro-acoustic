@@ -14,7 +14,7 @@ class Function_call(BaseModel):
     # ---
 
     id:    Annotated[int, Field(ge=__MIN_ID, le=__MAX_ID)]   # should be before track and args for validation
-    track: list[int] | None = None     # should be after id for validation
+    track: list[int]                   # should be after id for validation
     args:  list                        # should be after id for validation
 
     # ---
@@ -45,6 +45,8 @@ class Function_call(BaseModel):
                 raise ValueError("Input track is specified, yet shouldn't be such")
 
         for i in range(len(tracks)): # TODO: try to add check on correct id
+            if tracks[i] <= 0:
+                raise ValueError("Input track is incorrect, 0 or less")
             tracks[i] -= 1
 
         return tracks

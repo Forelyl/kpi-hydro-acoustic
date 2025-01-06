@@ -319,8 +319,8 @@ class Audio_track:
     def __trim(self, args: list[Any]):
         start: Time = args[0] # min, seconds
         end:   Time = args[1] # min, seconds
-        start = start.minutes * 60 + start.seconds
-        end   = end.minutes * 60 + end.seconds
+        start: int  = start.minutes * 60 + start.seconds
+        end:   int  = end.minutes * 60 + end.seconds
 
         # check start <= end
         amount_of_samples = self.time_domain_track.shape[0]
@@ -335,7 +335,7 @@ class Audio_track:
             raise ValueError(f'Start time is greater than track length: {start} > {length}')
 
         if start < 0:
-            start = 0
+            start: int = 0
 
         if end > length:
             end = length
