@@ -8,7 +8,7 @@ interface Props {
 }
 
 const TrackSelect = ({ step }: Props) => {
-  const { channels } = useAppSelector((state) => state.loadedFile);
+  const { channels, separateTracks } = useAppSelector((state) => state.loadedFile);
 
   const handleSelectTrack = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value) step.setTrack(+e.target.value);
@@ -21,11 +21,17 @@ const TrackSelect = ({ step }: Props) => {
         defaultValue="Track select"
         className="select">
         <option hidden>Track select</option>
-        {Array.from({ length: channels }).map((_, i) => (
+        { separateTracks ? (Array.from({ length: channels }).map((_, i) => (
           <option key={i + 1} value={i + 1}>
             {i + 1}
-          </option>
-        ))}
+          </option>))) 
+          : 
+          (
+            <option key='1' value='1'>
+            1
+            </option>
+          )
+        }
       </select>
       <div className="image_container">
         <SelectOpenIcon />
