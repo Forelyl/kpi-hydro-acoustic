@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator, Field, ValidationInfo, RootModel
+from pydantic import BaseModel, field_validator, Field, ValidationInfo, RootModel, model_validator
 from typing import Annotated, Any, ClassVar
 
 
@@ -13,13 +13,13 @@ class Function_call(BaseModel):
 
     # ---
 
-    id:    Annotated[int, Field(ge=__MIN_ID, le=__MAX_ID)]   # should be before track and args for validation
-    track: list[int]                   # should be after id for validation
-    args:  list                        # should be after id for validation
+    f_id:  Annotated[int, Field(ge=__MIN_ID, le=__MAX_ID)]   # should be before track and args for validation
+    track: list[int]                   # should be after f_id for validation
+    args:  list                        # should be after f_id for validation
 
     # ---
 
-    __USE_EXPLICIT_TRACK: ClassVar[tuple[bool]] = (        # id is a position (counting from 0)
+    __USE_EXPLICIT_TRACK: ClassVar[tuple[bool]] = (        # f_id is a position (counting from 0)
         True,  # 00
         True,  # 01
         True,  # 02
@@ -34,19 +34,20 @@ class Function_call(BaseModel):
         True,  # 11
     )
 
-    @field_validator("id")
+    @model_validator(mode='before')
     @classmethod
-    def __check_id(cls, id: int):
-        if id < cls.__MIN_ID or id > cls.__MAX_ID:
-            raise ValueError("Function id is incorrect")
-        return id
+    def validate_f_id_first(cls, values: dict[str, Any]) -> dict[str, Any]:
+        f_id = values.get("f_id")
+        if f_id is None or not (cls.__MIN_ID <= f_id <= cls.__MAX_ID):
+            raise ValueError("Invalid f_id")
+        return values
 
     @field_validator("track")
     @classmethod
     def __check_tracks(cls, tracks: list[int] | None, info: ValidationInfo):
         use_explicit = tracks is not None
-        if cls.__USE_EXPLICIT_TRACK[info.data["id"]] != use_explicit:
-            if cls.__USE_EXPLICIT_TRACK[info.data["id"]]:
+        if cls.__USE_EXPLICIT_TRACK[info.data["f_id"]] != use_explicit:
+            if cls.__USE_EXPLICIT_TRACK[info.data["f_id"]]:
                 raise ValueError("Input track is unspecified")
             else:
                 raise ValueError("Input track is specified, yet shouldn't be such")
@@ -86,7 +87,7 @@ class Function_call(BaseModel):
     @field_validator("args")
     @classmethod
     def __check_trait(cls, args: list[Any], validated_info: ValidationInfo) -> list[int | float | Time]:
-        checkers: tuple[type] = cls.__FUNCTIONS_ARGS[validated_info.data["id"]]
+        checkers: tuple[type] = cls.__FUNCTIONS_ARGS[validated_info.data["f_id"]]
         if len(checkers) != len(args):
             raise ValueError("Wrong number of arguments")
         for i in range(len(checkers)):
