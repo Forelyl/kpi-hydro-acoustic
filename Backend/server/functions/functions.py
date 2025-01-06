@@ -121,7 +121,7 @@ class Audio_track:
     def use_function_release(tracks: list['Audio_track'], function: Function_call, function_num: int) -> BytesIO | None:
         track, track_id = Audio_track.get_check_track_for_function_call(tracks, function)
 
-        if function.function_id == Function_type.COPY:
+        if function.id == Function_type.COPY:
             tracks[track_id] = Audio_track.__copy(track, function.args)
             return None
         else:
@@ -192,7 +192,7 @@ class Audio_track:
     # -------------------------------------------------------------
 
     def function_call(self, function: Function_call, function_num: int) -> BytesIO | None:
-        match function.function_id:
+        match function.id:
             case Function_type.LOW_PASS:
                 self.__low_pass(function.args)
                 return None
