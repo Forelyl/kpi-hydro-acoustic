@@ -299,6 +299,10 @@ h1 {
   border-radius: 3vh;
 }
 
+.pipline_step:has(>.top_part.body_empty) {
+  border: none;
+}
+
 .top_part {
   height: 9vh;
 
@@ -307,7 +311,7 @@ h1 {
   border: solid black 0.2vw;
 
   border-radius: 2.5vh;
-  border-top: none;
+  border-top-width: 0;
   margin: 0 -0.1vw;
 
   > div {
@@ -331,8 +335,9 @@ h1 {
 }
 
 .top_part.body_empty {
-  border: none;
+  border-top-width: 0.2vw;
 }
+
 
 .select_container {
   position: relative;
