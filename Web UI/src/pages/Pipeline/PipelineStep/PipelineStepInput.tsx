@@ -29,11 +29,17 @@ const renderInputField = (
     case 'Time':
       return <TimeInput onChange={setData} />;
     case 'Positive float':
-      return <input onChange={handlePositiveFloat} type="number" required />;
+      return <div className='time-input-wrapper'> 
+        <input className="time-input" onChange={handlePositiveFloat} type="number" required />
+      </div>;
     case 'Float':
-      return <input onChange={handleFloat} type="number" required />;
+      return <div className='time-input-wrapper'>
+        <input className="time-input" onChange={handleFloat} type="number" required />
+      </div>;
     case 'Non negative float':
-      return <input onChange={handleNonNegativeFloat} type="number" required />;
+      return <div className='time-input-wrapper'>
+        <input className="time-input" onChange={handleNonNegativeFloat} type="number" required />
+      </div>;
     default:
       return <div>Not implemented</div>;
   }
