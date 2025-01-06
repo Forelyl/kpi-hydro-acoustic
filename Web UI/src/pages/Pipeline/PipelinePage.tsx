@@ -9,7 +9,7 @@ import { setResultZip } from '../../store/loadedFileSlice';
 
 const Pipeline = () => {
   const { pipeline, handleAddStep } = usePipeline();
-  const [sendPipeline] = useSendPipelineMutation();
+  const [sendPipeline, {isLoading}] = useSendPipelineMutation();
   const { file, separateTracks } = useAppSelector((state) => state.loadedFile);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -35,19 +35,27 @@ const Pipeline = () => {
       })
       .catch(console.error);
   };
-
   return (
     <main id="pipline_page">
       {pipeline.map((step) => (
         <PipelineStep step={step} key={step.id} />
       ))}
 
-      <div onClick={handleAddStep} id="add_step">
+      <div onClick={handleAddStep} className="add_step">
         <PlusIcon />
       </div>
-      <div onClick={handleSendPipeline} id="add_step">
+      <div onClick={handleSendPipeline} className="add_step">
         <SendIcon />
       </div>
+      {
+        isLoading ? (
+          <div>
+            <h3>Analyzing...</h3>
+          </div>
+        ) : (<></>)
+      }
+
+
     </main>
   );
 };
