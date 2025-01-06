@@ -29,20 +29,23 @@ const renderInputField = (
     case 'Time':
       return <TimeInput onChange={setData} />;
     case 'Positive float':
-      return (
-        <input onChange={handlePositiveFloat} min={0} type="number" required />
-      );
+      return <div className='time-input-wrapper'>
+        <input className="time-input" onChange={handlePositiveFloat} type="number" required />
+      </div>
+
     case 'Float':
-      return <input onChange={handleFloat} type="number" required />;
+      return <div className='time-input-wrapper'>
+        <input className="time-input" onChange={handleFloat} type="number" required />
+      </div>;
     case 'Non negative float':
-      return (
-        <input
+      return <div className='time-input-wrapper'>
+        <input className="time-input"
           onChange={handleNonNegativeFloat}
           min={0}
           type="number"
           required
         />
-      );
+      </div>;
     default:
       return <div>Not implemented</div>;
   }

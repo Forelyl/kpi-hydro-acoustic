@@ -9,6 +9,7 @@ from noisereduce import reduce_noise
 import zipfile
 import copy
 from matplotlib import pyplot as plt
+import matplotlib
 import math
 # from functions.utils import pseudo_zip_result
 
@@ -344,7 +345,49 @@ class Audio_track:
         self.time_domain_track = self.time_domain_track[math.floor(start * self.sample_rate):math.floor(end * self.sample_rate)]
 
     def __xyz_diagram_tfa(self, args: list[Any], function_num: int) -> BytesIO:
-        pass
+    # Perform Short-Time Fourier Transform (STFT) for time-frequency analysis
+        n = len(self.time_domain_track)
+        segment_length = 1024  # Number of samples per segment
+        overlap = segment_length // 2  # 50% overlap
+        window = np.hamming(segment_length)
+
+        # Compute STFT
+        freqs, times, Zxx = signal.stft(
+            self.time_domain_track,
+            fs=self.sample_rate,
+            window=window,
+            nperseg=segment_length,
+            noverlap=overlap,
+            boundary=None
+        )
+
+        # Compute magnitude and convert to dB scale
+        magnitude = np.abs(Zxx)
+        magnitude_db = 20 * np.log10(magnitude + np.finfo(float).eps)
+
+        # Plotting the heatmap spectrogram
+        fig, ax = plt.subplots(figsize=(20, 10))
+
+        # Create the heatmap
+        cax = ax.pcolormesh(times, freqs, magnitude_db, cmap='viridis', shading='gouraud')
+
+        # Customize the plot
+        ax.set_title(f'Heatmap Spectrogram functioncall-{function_num + 1}')
+        ax.set_xlabel('Time (s)')
+        ax.set_ylabel('Frequency (Hz)')
+
+        # Add a color bar to indicate amplitude
+        fig.colorbar(cax, ax=ax, label='Amplitude (dB)')
+
+        # Save the plot to a buffer
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)
+        buffer.name = f"Heatmap_Spectrogram_functioncall{function_num + 1}.png"
+        plt.close()
+
+        return buffer
+
 
     def __xy_diagram_fa(self, args: list[Any], function_num: int) -> BytesIO:
         # Perform FFT on the audio data
