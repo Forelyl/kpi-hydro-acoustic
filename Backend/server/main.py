@@ -53,9 +53,11 @@ app.add_middleware(
 # logging middleware
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
+    content_type = request.headers.get("content-type")
+    print(f"Content-Type: {content_type}")  # This shows the body type (e.g., application/json)
     print(f"Request Method: {request.method}")
     print(f"Request URL: {request.url}")
     body = await request.body()  # Read the request body
-    print(f"Request Body: {body}")
+    # print(f"Request Body: {body}")
     response = await call_next(request)
     return response
