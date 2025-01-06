@@ -191,7 +191,7 @@ class Audio_track:
 
     # -------------------------------------------------------------
 
-    def __function_call(self, function: Function_call, function_num: int) -> BytesIO | None:
+    def function_call(self, function: Function_call, function_num: int) -> BytesIO | None:
         match function.f_id:
             case Function_type.LOW_PASS:
                 self.__low_pass(function.args)
