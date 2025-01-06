@@ -1,6 +1,6 @@
 [
     {
-        "id": 0,
+        "f_id": 0,
         "name":        "Low Pass Filter",
         "description": "an audio signal filter that muffles the signal amplitude after the cut-off frequency",
         "func_type":   "Data modifier",
@@ -16,7 +16,7 @@
     },
 
     {
-        "id": 1,
+        "f_id": 1,
         "name":        "High Pass Filter",
         "description": "an audio signal filter that muffles the signal amplitude to the cut-off frequency",
         "func_type":   "Data modifier",
@@ -32,7 +32,7 @@
     },
 
     {
-        "id": 2,
+        "f_id": 2,
         "name":        "Band Pass Filter",
         "description": "an audio signal filter that muffles the signal amplitude before and after the first and after the second cutoff frequency",
         "func_type":   "Data modifier",
@@ -54,7 +54,7 @@
     },
 
     {
-        "id": 3,
+        "f_id": 3,
         "name":        "Notch Filter",
         "description": "an audio signal filter that mutes the amplitude of a given frequency signal almost entirely",
         "func_type":   "Data modifier",
@@ -80,7 +80,7 @@
 
 
     {
-        "id": 4,
+        "f_id": 4,
         "name":        "Gain/Volume",
         "description": "Change amplitude of all non zero frequencies on some amount of decibels",
         "func_type":   "Data modifier",
@@ -96,7 +96,7 @@
     },
 
     {
-        "id": 5,
+        "f_id": 5,
         "name":        "Master/Level",
         "description": "Apply percents on amplitudes on all frequencies",
         "func_type":   "Data modifier",
@@ -114,7 +114,7 @@
 
 
     {
-        "id": 6,
+        "f_id": 6,
         "name":        "Noise filtering",
         "description": "Separates signal into signal and noise section, than reduce noise value for selected amount of dB",
         "func_type":   "Data modifier",
@@ -123,7 +123,7 @@
     },
 
     {
-        "id": 7,
+        "f_id": 7,
         "name":        "Useful signal amplification",
         "description": "Separates signal into signal and noise section, than increases signal value for selected amount of dB",
         "func_type":   "Data modifier",
@@ -146,7 +146,7 @@
 
 
     {
-        "id": 8,
+        "f_id": 8,
         "name":        "Select/trim time interval",
         "description": "Selected interval is to be left",
         "func_type":   "Data modifier",
@@ -174,7 +174,7 @@
 
 
     {
-        "id": 9,
+        "f_id": 9,
         "name":        "3D TFA Plot",
         "description": "Time-Frequency-Amplitude heatmap with amplitude represented as color changes",
         "func_type":   "Graphical",
@@ -182,7 +182,7 @@
         "choose_track": true
     },
     {
-        "id": 10,
+        "f_id": 10,
         "name":        "2D Signal spectogram",
         "description": "Frequency-Amplitude 2d plot",
         "func_type":   "Graphical",
@@ -198,7 +198,7 @@
 
 
     {
-        "id": 11,
+        "f_id": 11,
         "name":        "Copy/Branch",
         "description": "Makes n-amount copies of selected track",
         "func_type":   "Copy",
