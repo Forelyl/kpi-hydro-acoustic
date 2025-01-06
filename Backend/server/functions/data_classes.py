@@ -34,10 +34,16 @@ class Function_call(BaseModel):
         True,  # 11
     )
 
+    @field_validator("id")
+    @classmethod
+    def __check_id(cls, id: int):
+        if id < cls.__MIN_ID or id > cls.__MAX_ID:
+            raise ValueError("Function id is incorrect")
+        return id
+
     @field_validator("track")
     @classmethod
     def __check_tracks(cls, tracks: list[int] | None, info: ValidationInfo):
-        print("Incorrect value: ", info.data["id"])
         use_explicit = tracks is not None
         if cls.__USE_EXPLICIT_TRACK[info.data["id"]] != use_explicit:
             if cls.__USE_EXPLICIT_TRACK[info.data["id"]]:
