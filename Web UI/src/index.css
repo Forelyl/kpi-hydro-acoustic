@@ -3,6 +3,8 @@
   --background: #ffffffde;
   --light_green: #26fabe;
   --disabled_color: #bababa;
+
+  user-select: none;
 }
 
 body {
@@ -32,7 +34,7 @@ header {
   justify-items: center;
   padding: 0 5vh 0 5vh;
 
-  > img {
+  > a > img {
     width: 9vh;
     height: 9vh;
     justify-self: start;
@@ -246,6 +248,8 @@ h1 {
   font-size: 4vh;
   font-weight: 500;
   color: var(--background);
+
+  transition: 0.3s ease-in-out background-color;
 }
 
 #upload_button:disabled {
@@ -281,12 +285,14 @@ h1 {
 }
 
 #pipline_page {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .pipline_step {
+  flex-grow: 0;
   width: 70%;
   height: 100%;
   margin-top: 5vh;
@@ -457,13 +463,11 @@ option {
   color: var(--background);
 
   margin-top: 4vh;
+  transition: 0.3s ease-in-out background-color;
 }
 
 .add_step:hover {
   cursor: pointer;
-}
-
-.add_step:active {
   background-color: var(--light_green);
   color: black;
 }
@@ -489,7 +493,9 @@ input::-webkit-inner-spin-button {
 }
 
 #download_image {
-  height: 50vh;
+  object-fit: contain;
+  height: 30vh;
+  width: 100vw;
 }
 
 #download_button {
@@ -519,6 +525,30 @@ input::-webkit-inner-spin-button {
 }
 
 #download_button:enabled:hover {
+  background-color: var(--light_green);
+  color: black;
+}
+
+#send_button {
+  flex-shrink: 0;
+  height: 8vh;
+  width: 15vw;
+  border: none;
+  background-color: var(--dark_green);
+  border-radius: 4vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--background);
+
+  margin-top: 4vh;
+
+  transition: 0.3s ease-in-out background-color;
+}
+
+#send_button:hover {
+  cursor: pointer;
   background-color: var(--light_green);
   color: black;
 }

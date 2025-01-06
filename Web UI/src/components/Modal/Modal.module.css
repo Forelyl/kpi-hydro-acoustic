@@ -36,22 +36,23 @@
     width: auto;
     height: 8vh;
     aspect-ratio: 5/1;
-  
+
     align-self: center;
-  
+
     border: none;
     border-radius: 5vh;
     background-color: var(--dark_green);
-  
+
     font-size: 4vh;
     font-weight: 500;
     color: var(--background);
     cursor: pointer;
 
     margin-top: 2vh;
+    transition: 0.3s ease-in-out background-color;
   }
 
-  > button:active {
+  > button:hover {
     background-color: var(--light_green);
     color: black;
   }

@@ -15,7 +15,6 @@ const PipelineStepHeader = ({ step }: Props) => {
         step.analyzeType?.args.length ? '' : 'body_empty'
       }`}>
       <div>
-        <MenuIcon />
         <div onClick={() => step.removeSelf()}>
           <CloseIcon />
         </div>

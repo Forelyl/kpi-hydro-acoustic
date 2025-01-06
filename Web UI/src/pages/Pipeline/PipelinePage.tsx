@@ -23,6 +23,7 @@ const Pipeline = () => {
   const dispatch = useAppDispatch();
 
   const handleSendPipeline = () => {
+    if (isLoading) return;
     const steps = pipeline.map((step) => ({
       id: step.analyzeType?.id,
       track: [step.track],
@@ -59,21 +60,14 @@ const Pipeline = () => {
       <div onClick={handleAddStep} className="add_step">
         <PlusIcon />
       </div>
-      <div onClick={handleSendPipeline} className="add_step">
-        <SendIcon />
+      <div onClick={handleSendPipeline} id="send_button">
+        {isLoading ? "Analyzing... " : "Send pipeline"}
       </div>
       <Modal open={!!error}>
         <h2>{error?.title}</h2>
         <p>{error?.message}</p>
         <button onClick={() => dispatch(resetError())}>OK</button>
       </Modal>
-      {isLoading ? (
-        <div>
-          <h3>Analyzing...</h3>
-        </div>
-      ) : (
-        <></>
-      )}
     </main>
   );
 };

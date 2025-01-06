@@ -3,35 +3,15 @@ const AboutPage = () => {
     <main id="about_us_page">
       <h2>About us</h2>
       <p>
-        Pizza ipsum dolor amet hawaiian meat lovers pepperoni, philly steak
-        burnt mouth pizza roll beef meatball thin crust Chicago style anchovies.
-        White garlic chicken and bacon fresh tomatoes, lasagna chicken wing
-        ricotta banana peppers bbq pan pepperoni white pizza burnt mouth NY
-        style garlic. Bacon & tomato hand tossed spinach, lasagna bbq rib
-        broccoli philly chicken pepperoni garlic sauce steak deep crust chicken
-        chicken wing meat lovers. White pizza extra cheese bbq rib pizza roll,
-        bacon garlic sauce pepperoni meatball philly chicken pork mushrooms
-        black olives pan large Chicago style. Bianca string cheese pizza
-        pineapple garlic sauce. Garlic sauce beef sausage marinara hawaiian
-        party black olives chicken bbq bbq rib. Deep crust mushrooms garlic
-        hawaiian extra sauce hand tossed black olives philly chicken party
-        Chicago style. Mushrooms philly steak melted cheese bacon, meatball
-        ricotta chicken stuffed crust spinach. Thin crust garlic parmesan
-        ricotta chicken and bacon, garlic sauce peppers bbq rib bianca party
-        meat lovers. Meat lovers white garlic stuffed crust, hand tossed NY
-        style white pizza pie philly steak. Meat lovers bbq sauce pan mushrooms
-        white pizza deep crust.
+        We are a group of students from the Kyiv Polytechnic Institute: Oleksandr, Maksym, Nazar, and Mykhailo, from group TV-22. This website is a project developed as part of our coursework. It serves as a demonstration of our efforts in building a functional tool for audio analysis.
       </p>
+      <br/>
       <p>
-        Pepperoni banana peppers thin crust, white garlic Chicago style bbq
-        sauce platter marinara garlic thin crust pie deep crust bianca. Chicken
-        wing platter onions pie red onions, ranch philly steak ham chicken wing
-        Chicago style. Mayo anchovies pesto black olives deep crust sausage
-        mozzarella peppers bianca sausage. Mozzarella spinach Chicago style,
-        thin crust string cheese pork melted cheese mushrooms chicken wing black
-        olives pie white garlic sausage mayo. Meatball ham meat lovers, personal
-        sausage white garlic thin crust buffalo sauce pepperoni pizza roll NY
-        style burnt mouth string cheese.
+        Our platform allows users to upload audio files in the .wav format. If the audio contains multiple channels, you have the option to separate them for individual processing. Additionally, the site supports an unlimited number of audio signal processing actions, organized in a pipeline structure. Each step in the pipeline processes the modified file from the previous step, ensuring a streamlined workflow. The final result of the pipeline is provided as a downloadable .zip archive.
+      </p>
+      <br/>
+      <p>
+        We hope you find this tool helpful for exploring audio processing capabilities!
       </p>
     </main>
   );

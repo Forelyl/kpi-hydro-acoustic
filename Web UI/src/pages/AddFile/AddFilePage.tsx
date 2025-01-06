@@ -21,7 +21,7 @@ const AddFile = () => {
       <button onClick={handleNext} disabled={!file} id="upload_button">
         Next
       </button>
-      <Link to="about">?</Link>
+      <Link to="about" draggable="false">?</Link>
       <Modal open={!!error}>
         <h2>{error?.title}</h2>
         <p>{error?.message}</p>
