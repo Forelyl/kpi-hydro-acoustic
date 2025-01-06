@@ -29,7 +29,7 @@ export const pipelineApi = createApi({
     }),
     sendPipeline: builder.mutation({
       query: (body: FormData) => ({
-        url: '/function_call/',
+        url: '/functions_call/',
         method: 'POST',
         body
       })
