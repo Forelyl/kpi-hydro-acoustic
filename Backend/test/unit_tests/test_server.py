@@ -1,5 +1,4 @@
 import copy
-import os
 import random
 import unittest
 from unittest.mock import patch
@@ -7,7 +6,7 @@ from unittest.mock import patch
 import numpy
 import numpy as np
 from pydantic import ValidationError
-from server.functions.data_classes import *
+from server.functions.data_classes import Function_call, Time
 from io import BytesIO, StringIO
 
 from server.functions.functions import Audio_track, make_pipeline
@@ -16,22 +15,22 @@ from server.functions.functions import Audio_track, make_pipeline
 class TestDataclasses(unittest.TestCase):
     def test_time_correct(self):
         try:
-            Time.model_validate_json('{"seconds": 12, "minutes": 3}', strict = True)
-            Time.model_validate_json('{"seconds": 12, "minutes": 0}', strict = True)
-            Time.model_validate_json('{"seconds": 0, "minutes": 123}', strict = True)
-            Time.model_validate_json('{"minutes": 3, "seconds": 12}', strict = True)
+            Time.model_validate_json('{"seconds": 12, "minutes": 3}', strict=True)
+            Time.model_validate_json('{"seconds": 12, "minutes": 0}', strict=True)
+            Time.model_validate_json('{"seconds": 0, "minutes": 123}', strict=True)
+            Time.model_validate_json('{"minutes": 3, "seconds": 12}', strict=True)
         except ValidationError as e:
             self.fail("Time hasn't been validated - yet should has been, error: " + str(e))
 
     def test_time_incorrect(self):
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": -12, "minutes": 3}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 12, "minutes": -3}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": -12, "minutes": -3}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": sdf, "minutes": 3}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 56, "minutes": sdf}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 60, "minutes": 0}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"errr": 2, "minutes": 0}', strict = True)
-        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 60, "not_correct": 0}', strict = True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": -12, "minutes": 3}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 12, "minutes": -3}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": -12, "minutes": -3}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": sdf, "minutes": 3}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 56, "minutes": sdf}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 60, "minutes": 0}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"errr": 2, "minutes": 0}', strict=True)
+        self.assertRaises(ValidationError, Time.model_validate_json, '{"seconds": 60, "not_correct": 0}', strict=True)
 
     def test_function_correct(self):
         to_validate: list[str] = [
@@ -39,7 +38,7 @@ class TestDataclasses(unittest.TestCase):
             {
                 "f_id": 0,
                 "args": [1133],
-                "track": [1,2,3] 
+                "track": [1,2,3]
             }
             ''',
             '''
@@ -53,7 +52,7 @@ class TestDataclasses(unittest.TestCase):
             {
                 "f_id": 2,
                 "args": [1111, 1243],
-                "track": [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9] 
+                "track": [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
             ''',
             '''
@@ -67,62 +66,62 @@ class TestDataclasses(unittest.TestCase):
             {
                 "f_id": 4,
                 "args": [1],
-                "track": [2] 
+                "track": [2]
             }
             ''',
             '''
              {
                  "f_id": 5,
                  "args": [1],
-                 "track": [1] 
+                 "track": [1]
              }
             ''',
             '''
             {
                 "f_id": 6,
                 "args": [],
-                "track": [1] 
+                "track": [1]
             }
             ''',
             '''
             {
                 "f_id": 7,
                 "args": [-12],
-                "track": [1] 
+                "track": [1]
             }
             ''',
             '''
             {
                 "f_id": 8,
                 "args": [{"seconds": 12, "minutes": 3}, {"minutes": 10, "seconds": 12}],
-                "track": [1] 
+                "track": [1]
             }
             ''',
             '''
             {
                 "f_id": 9,
                 "args": [],
-                "track": [1] 
+                "track": [1]
             }
             ''',
             '''
             {
                 "f_id": 10,
                 "args": [],
-                "track": [1] 
+                "track": [1]
             }
             ''',
             '''
             {
                 "f_id": 11,
                 "args": [1],
-                "track": [1] 
+                "track": [1]
             }
             '''
         ]
         try:
             for json_func_call in to_validate:
-                Function_call.model_validate_json(json_func_call, strict = True)
+                Function_call.model_validate_json(json_func_call, strict=True)
         except ValidationError as e:
             self.fail("Time hasn't been validated - yet should has been, error: " + str(e))
 
@@ -131,48 +130,48 @@ class TestDataclasses(unittest.TestCase):
             {
                 "f_id": 13,
                 "args": [1],
-                "track": [1] 
+                "track": [1]
             }
-            ''', strict = True)
+            ''', strict=True)
         self.assertRaises(ValidationError, Function_call.model_validate_json,             '''
             {
                 "f_id": -1,
                 "args": [1],
-                "track": [1] 
+                "track": [1]
             }
-            ''', strict = True)
+            ''', strict=True)
         self.assertRaises(ValidationError, Function_call.model_validate_json,             '''
             {
                 "f_id": 1,
                 "args": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                "track": [1] 
+                "track": [1]
             }
-            ''', strict = True)
+            ''', strict=True)
         self.assertRaises(ValidationError, Function_call.model_validate_json,             '''
             {
                 "f_id": 1,
                 "args": [],
-                "track": [1] 
+                "track": [1]
             }
-            ''', strict = True)
+            ''', strict=True)
         self.assertRaises(ValidationError, Function_call.model_validate_json,             '''
             {
                 "f_id": 1,
                 "args": [1],
-                "track": [-1] 
+                "track": [-1]
             }
-            ''', strict = True)
+            ''', strict=True)
 
         self.assertRaises(ValidationError, Function_call.model_validate_json,             '''
             {
                 "f_id": 13,
                 "args": [1],
-                "track": [] 
+                "track": []
             }
-            ''', strict = True)
+            ''', strict=True)
+
 
 class TestFunctions(unittest.TestCase):
-    #server.functions.functions.Audio_track.
 
     def setUp(self):
         self.functions_to_call: list[Function_call] = [
@@ -204,7 +203,6 @@ class TestFunctions(unittest.TestCase):
     @patch.object(Audio_track, '_Audio_track__band_pass')
     @patch.object(Audio_track, '_Audio_track__high_pass')
     @patch.object(Audio_track, '_Audio_track__low_pass')
-
     def test_function_call_calling(self, function_call0, function_call1, function_call2, function_call3, function_call4, function_call5,
                                    function_call6, function_call7, function_call8, function_call9, function_call10, function_call11):
         function_calls = [
@@ -258,6 +256,7 @@ class TestFunctions(unittest.TestCase):
         Audio_track.use_function_release(track, self.functions_to_call[0], 0)
         function_call.assert_called_with(Function_call(**{"f_id": 0, "track": [1], "args": [1,]}), 0)
 
+
 class TestCallFunctions(unittest.TestCase):
 
     def setUp(self):
@@ -278,11 +277,10 @@ class TestCallFunctions(unittest.TestCase):
         ]
 
         self.trim_func = Function_call(**{
-            "f_id": 8, 
-            "track": [1], 
+            "f_id": 8,
+            "track": [1],
             "args": [{"seconds": 1, "minutes": 0}, {"seconds": 2, "minutes": 0}]
         })
-
 
     def test_data_change_full_functions(self):
         samplerate = 44100
@@ -301,7 +299,6 @@ class TestCallFunctions(unittest.TestCase):
             zero_track = numpy.zeros(len(result_track))
             self.assertFalse(numpy.array_equal(result_track, zero_track))
 
-
     def test_data_size_change_functions(self):
         samplerate = 44100
         duration = 5 # range [1, 2] is been cut
@@ -317,15 +314,14 @@ class TestCallFunctions(unittest.TestCase):
         # compare length
         self.assertGreater(len(old_data), len(tracks[0].time_domain_track))
 
-
     def test_image_generate_functions(self):
 
         samplerate = 44100
         duration = 5
 
         possible_results = [
-            f"Heatmap_Spectrogram_functioncall1.png",
-            f"2D_Signal_spectogram_functioncall1.png"
+            "Heatmap_Spectrogram_functioncall1.png",
+            "2D_Signal_spectogram_functioncall1.png"
         ]
 
         # Calculate the number of samples
@@ -366,7 +362,7 @@ class TestGlobalCheck(unittest.TestCase):
     @patch('server.functions.functions.Audio_track.use_function')
     def test_global_pipeline_check(self, stub_use_function):
         stub_use_function.return_value = None
-        with open( '../test-data/test_file.wav', 'rb') as test_file:
+        with open('../test-data/test_file.wav', 'rb') as test_file:
             wav_file_as_bytes = test_file.read()
 
         #
