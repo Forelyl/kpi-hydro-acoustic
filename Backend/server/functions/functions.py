@@ -255,20 +255,6 @@ class Audio_track:
         else:
             return [Audio_track(tracks, sample_rate, [1,]),]
 
-    @staticmethod
-    def __all_pass(input_signal, cutoff_frequency, sample_rate):
-        dn_1 = 0
-        allpass_output = numpy.zeros_like(input_signal)
-        for n in range(input_signal.shape[0]):
-            tan = numpy.tan(numpy.pi * cutoff_frequency / sample_rate)
-            a1 = (tan - 1) / (tan + 1)
-
-            allpass_output[n] = a1 * input_signal[n] + dn_1
-
-            dn_1 = input_signal[n] - a1 * allpass_output[n]
-
-        return allpass_output
-
     def __low_pass(self, args: list[Any]):
         pivotal_frequency: float = args[0] # Hz
 
