@@ -9,6 +9,7 @@ from noisereduce import reduce_noise
 import zipfile
 import copy
 from matplotlib import pyplot as plt
+from fastapi import HTTPException, status
 
 import math
 # from functions.utils import pseudo_zip_result
@@ -224,6 +225,9 @@ class Audio_track:
                 return self.__xyz_diagram_tfa(function.args, function_num)
             case Function_type.XY_DIAGRAM_FREQUENCY_2_AMPLITUDE:
                 return self.__xy_diagram_fa(function.args, function_num)
+            case Function_type.COPY:
+                raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Internal error, incorrect copy route")
+                return None
 
     @staticmethod
     def __copy(obj: 'Audio_track', params: list[Any]) -> list['Audio_track']:

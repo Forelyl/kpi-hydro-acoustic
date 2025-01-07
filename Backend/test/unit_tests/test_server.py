@@ -1,3 +1,6 @@
+import copy
+import os
+import random
 import unittest
 from unittest.mock import patch
 
@@ -5,9 +8,9 @@ import numpy
 import numpy as np
 from pydantic import ValidationError
 from server.functions.data_classes import *
-from io import BytesIO
+from io import BytesIO, StringIO
 
-from server.functions.functions import Audio_track
+from server.functions.functions import Audio_track, make_pipeline
 
 
 class TestDataclasses(unittest.TestCase):
@@ -117,7 +120,6 @@ class TestDataclasses(unittest.TestCase):
             }
             '''
         ]
-        to_validate = to_validate[:4]
         try:
             for json_func_call in to_validate:
                 Function_call.model_validate_json(json_func_call, strict = True)
