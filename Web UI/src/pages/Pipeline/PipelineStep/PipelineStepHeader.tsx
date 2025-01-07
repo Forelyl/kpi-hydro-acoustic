@@ -1,4 +1,3 @@
-import MenuIcon from '../../../components/icons/MenuIcon';
 import CloseIcon from '../../../components/icons/CloseIcon';
 import TrackSelect from '../TrackSelect';
 import AnalyzeTypeSelect from '../AnalyzeTypeSelect';

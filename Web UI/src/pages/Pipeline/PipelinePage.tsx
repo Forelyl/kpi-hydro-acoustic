@@ -1,7 +1,6 @@
 import PipelineStep from './PipelineStep/PipelineStep';
 import usePipeline from '../../hooks/usePipeline';
 import PlusIcon from '../../components/icons/PlusIcon';
-import SendIcon from '../../components/icons/SendIcon';
 import { useSendPipelineMutation } from '../../store/pipelineApi';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { useNavigate } from 'react-router';
@@ -25,7 +24,7 @@ const Pipeline = () => {
   const handleSendPipeline = () => {
     if (isLoading) return;
     const steps = pipeline.map((step) => ({
-      id: step.analyzeType?.id,
+      f_id: step.analyzeType?.f_id,
       track: [step.track],
       args: step.data
     }));
@@ -61,7 +60,7 @@ const Pipeline = () => {
         <PlusIcon />
       </div>
       <div onClick={handleSendPipeline} id="send_button">
-        {isLoading ? "Analyzing... " : "Send pipeline"}
+        {isLoading ? 'Analyzing... ' : 'Send pipeline'}
       </div>
       <Modal open={!!error}>
         <h2>{error?.title}</h2>

@@ -30,7 +30,7 @@ const AnalyzeTypeSelect = ({ step }: Props) => {
         {!isLoading &&
           analizeTypes?.length &&
           analizeTypes.map((type) => (
-            <option key={type.id} value={type.name}>
+            <option key={type.f_id} value={type.name}>
               {type.name}
             </option>
           ))}
